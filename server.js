@@ -2,6 +2,9 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 
+//Socket IO 
+require('./socket');
+
 const app = express();
 
 //Connect Database

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
+import { io } from 'socket.io-client';
 
 // Redux
 import { getAllTweets } from './redux/actions/tweet';
 import { getAllUsers } from './redux/actions/auth';
+import { getAllNews } from './redux/actions/news';
 import { useDispatch } from 'react-redux';
 
 // Components
@@ -18,17 +20,25 @@ import Tweet from './pages/tweet';
 
 function App() {
   const dispatch = useDispatch();
+  const socket = io('http://localhost:8001')
+  socket.on('connect', () => {
+    console.log(`You connected with id ${socket.id}`)
+    // emit will send to use to send tweet
+    socket.emit('custom-event', {a: 'hellloo'})
+  })
 
-  // Note 
+
+  // Note
   //will reload to get new tweets every 60 seconds
   useEffect(() => {
     dispatch(getAllTweets());
     dispatch(getAllUsers());
+    dispatch(getAllNews());
     // setInterval(() => {
     //   dispatch(getAllTweets());
     //   dispatch(getAllUsers());
     // }, 60000);
-  }, [getAllUsers, getAllTweets]);
+  }, [getAllUsers, getAllTweets, getAllNews]);
 
   return (
     <StyledApp>

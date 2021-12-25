@@ -10,6 +10,7 @@ export const GET_ALL_TWEETS = 'GET_ALL_TWEETS';
 export const GET_ALL_TWEETS_FAIL = 'GET_ALL_TWEETS_FAIL';
 export const ALL_USER_LOADED = 'ALL_USER_LOADED';
 export const ALL_USER_FAILED = 'ALL_USER_FAILED';
-
+export const GET_NEWS = 'GET_NEWS';
+export const GET_NEWS_FAIL = 'GET_NEWS_FAIL';
 
 
