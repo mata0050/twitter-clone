@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 // Components
 import AuthNavBar from '../../components/AuthNavBar';
 import { StyledInput } from '../../css/LinkButtonsStyle';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/actions/auth';
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [formData, setFormData] = useState({
     password: '',
     email: '',
@@ -19,11 +25,14 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  console.log(formData);
-
   const onSubmit = (event) => {
     event.preventDefault();
+    dispatch(loginUser(formData));
   };
+
+  if (isAuthenticated) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <StyledLogin>
@@ -50,10 +59,7 @@ const Login = () => {
               onChange={onChange}
             />
 
-            <StyledInput
-              type='submit'
-              value='Login'
-            />
+            <StyledInput type='submit' value='Login' />
           </form>
           <span>
             Don't have an account? <Link to='/register'>Register</Link>

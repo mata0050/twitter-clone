@@ -55,10 +55,7 @@ router.post(
 
     try {
       let user = await User.findOne({ email });
-      const getRole = await User.findOne({ email })
-        .select('role')
-        .select('-_id');
-      const { role } = getRole;
+  
 
       if (!user) {
         return res
@@ -86,7 +83,7 @@ router.post(
         { expiresIn: '5 days' },
         (err, token) => {
           if (err) throw err;
-          res.json({ token, role });
+          res.json({ token, email: user.email });
         }
       );
     } catch (err) {

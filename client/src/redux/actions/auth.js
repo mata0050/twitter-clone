@@ -1,5 +1,6 @@
 import api from '../../utils/api';
 import setAuthToken from '../../utils/setAuthToken';
+import { setAlert } from './alert';
 
 import {
   REGISTER_USER_FAILED,
@@ -8,6 +9,8 @@ import {
   AUTH_ERROR,
   ALL_USER_LOADED,
   ALL_USER_FAILED,
+  LOGIN_USER,
+  LOGIN_USER_FAILED,
 } from './types';
 
 // @route    GET /login
@@ -19,12 +22,13 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = await api.get('auth');
+    const res = await api.get('login');
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: AUTH_ERROR,
     });
@@ -51,7 +55,7 @@ export const getAllUsers = () => async (dispatch) => {
 // @route    POST /register
 // @desc     Register a User
 // @access   Public
-export const register = (formData) => async (dispatch) => {
+export const registerUser = (formData) => async (dispatch) => {
   try {
     const res = await api.post('register', formData);
     dispatch({
@@ -60,8 +64,34 @@ export const register = (formData) => async (dispatch) => {
     });
     dispatch(loadUser());
   } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({ type: REGISTER_USER_FAILED });
+  }
+};
+
+// @route    POST /login
+// @desc     Login a User
+// @access   Public
+export const loginUser = (formData) => async (dispatch) => {
+  try {
+    const res = await api.post('login', formData);
     dispatch({
-      type: REGISTER_USER_FAILED,
+      type: LOGIN_USER,
+      payload: res.data,
     });
+    dispatch(loadUser());
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({ type: LOGIN_USER_FAILED });
   }
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // CSS
 import { StyledInput } from '../../css/LinkButtonsStyle';
@@ -8,8 +8,8 @@ import { StyledInput } from '../../css/LinkButtonsStyle';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../redux/actions/alert';
-import { register } from '../../redux/actions/auth';
-
+import { registerUser } from '../../redux/actions/auth';
+import { getAllTweets } from '../../redux/actions/tweet';
 // Components
 import Alert from '../../components/Alert';
 import AuthNavBar from '../../components/AuthNavBar';
@@ -18,7 +18,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const navigate = useNavigate();
+ 
 
   const [formData, setFormData] = useState({
     username: '',
@@ -55,14 +55,13 @@ const Register = () => {
       email,
     };
 
-    dispatch(register(data));
+    dispatch(registerUser(data));
   };
 
-
-    // Redirect if logged in
-    if (isAuthenticated) {
-      return navigate('/');
-    }
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <StyledRegister>

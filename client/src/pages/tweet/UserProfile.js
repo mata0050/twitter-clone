@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // generate random number
 function getRandomInt(max) {
@@ -8,8 +11,19 @@ function getRandomInt(max) {
 }
 
 const UserProfile = ({ user }) => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const { avatar, username, date } = user;
+  const [tweet, setTweet] = useState();
   const randomNumber = getRandomInt(90);
+
+  console.log(tweet);
+
+  function onSubmit(e) {
+    e.preventDefault();
+    // Note dispatch tweet
+    console.log('woork');
+    setTweet('');
+  }
 
   return (
     <StyledUserProfile>
@@ -23,10 +37,21 @@ const UserProfile = ({ user }) => {
       {/* avatar and follow button */}
       <div className='avatar'>
         <img src={avatar} alt='user profile pic' />
-        <button>Follow</button>
+        {isAuthenticated ? (
+          <button
+            style={{
+              background: 'var(--color-blue)',
+              color: 'var(--color-white)',
+            }}
+          >
+            Create Tweet
+          </button>
+        ) : (
+          <button>Follow</button>
+        )}
       </div>
 
-      {/*  */}
+      {/*  user info*/}
       <div className='user-info'>
         <span>{username[0].toUpperCase() + username.substring(1)}</span>
         <span>@{username}</span>
@@ -34,6 +59,17 @@ const UserProfile = ({ user }) => {
           <i class='fas fa-table'></i> Joined {moment(date).format('MMMM YYYY')}
         </span>
       </div>
+
+      {/* create tweet input */}
+      <form onSubmit={onSubmit}>
+        <textarea
+          type='text'
+          value={tweet}
+          name='tweet'
+          onChange={(e) => setTweet(e.target.value)}
+        />
+        <input type='submit' />
+      </form>
     </StyledUserProfile>
   );
 };
@@ -89,6 +125,30 @@ const StyledUserProfile = styled.div`
       }
       color: var(--color-grey);
     }
+  }
+
+  form {
+    padding: 10px 25px;
+
+    input, textarea {
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    textarea {
+      height: 100px;
+      padding: 10px;
+      font-family: var(--font-family);
+      margin-bottom: 10px;
+    }
+
+    input{
+      height: 45px;
+      background: var(--color-lightBlue);
+      color: var(--color-white);
+    }
+
   }
 `;
 

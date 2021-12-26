@@ -4,17 +4,38 @@ import styled from 'styled-components';
 // CSS styles
 import { StyledLink } from '../css/LinkButtonsStyle';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 const NavBar = () => {
+  const username = useSelector((state) => state.auth.username);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userId = useSelector((state) => state.auth.userId);
+  const allTweets = useSelector((state) => state.tweet.tweets);
+
+  // all the users Tweeters
+  const userTweets =
+    allTweets.length !== 0 &&
+    allTweets.filter((t) => t.userID === userId).length;
+
+  console.log(userTweets);
+
   return (
     <StyledNavBar>
       <i class='fas fa-arrow-left'></i>
       <div className='account-name'>
-        <span>@Frank</span>
-        <span>45 tweets</span>
+        <span>{username !== null ? `@${username}` : 'Tweeter'}</span>
+        <span>
+          {allTweets.length === 0
+            ? 'Welcome to Tweeter'
+            : `${userTweets} Tweets`}
+        </span>
       </div>
-      <StyledLink flex='0.3' to='..'>
-        Log in
-      </StyledLink>
+      {!isAuthenticated && (
+        <StyledLink flex='0.3' to='..'>
+          Log in
+        </StyledLink>
+      )}
     </StyledNavBar>
   );
 };

@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 
 // Redux
 import { getAllTweets } from './redux/actions/tweet';
-import { getAllUsers } from './redux/actions/auth';
+import { getAllUsers, loadUser } from './redux/actions/auth';
 import { getAllNews } from './redux/actions/news';
 import { useDispatch } from 'react-redux';
 
@@ -17,6 +17,7 @@ import Landing from './pages/Landing';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import Tweet from './pages/tweet';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -34,11 +35,12 @@ function App() {
     dispatch(getAllTweets());
     dispatch(getAllUsers());
     dispatch(getAllNews());
+    dispatch(loadUser())
     // setInterval(() => {
     //   dispatch(getAllTweets());
     //   dispatch(getAllUsers());
     // }, 60000);
-  }, [getAllUsers, getAllTweets, getAllNews]);
+  }, [getAllUsers, getAllTweets, getAllNews, loadUser]);
 
   return (
     <StyledApp>

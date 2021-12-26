@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
   --color-warning: #ffd200;
   --color-danger: rgb(250, 7, 7);
   --color-success: rgb(118, 170, 14);
+  --font-family: "'Roboto', sans-serif";
 }
 
 /* font- Roboto */
