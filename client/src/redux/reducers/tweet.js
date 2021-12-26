@@ -3,6 +3,7 @@ import {
   GET_ALL_TWEETS_FAIL,
   ALL_USER_LOADED,
   ALL_USER_FAILED,
+  CREATE_TWEET,
 } from '../actions/types';
 
 const initialState = {
@@ -38,6 +39,12 @@ const tweets = (state = initialState, action) => {
       return {
         ...state,
         allUsers: [],
+        loading: false,
+      };
+
+    case CREATE_TWEET:
+      return {
+        ...state,
         loading: false,
       };
     default:

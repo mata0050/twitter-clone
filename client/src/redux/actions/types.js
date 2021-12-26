@@ -13,3 +13,7 @@ export const ALL_USER_LOADED = 'ALL_USER_LOADED';
 export const ALL_USER_FAILED = 'ALL_USER_FAILED';
 export const GET_NEWS = 'GET_NEWS';
 export const GET_NEWS_FAIL = 'GET_NEWS_FAIL';
+
+
+// ------------ Create a tweet
+export const CREATE_TWEET = 'CREATE_TWEET';

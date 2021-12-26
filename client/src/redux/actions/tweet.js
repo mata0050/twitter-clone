@@ -3,7 +3,7 @@ import api from '../../utils/api';
 import {
   GET_ALL_TWEETS,
   GET_ALL_TWEETS_FAIL,
-
+  CREATE_TWEET,
 } from '../actions/types';
 
 import { getAllUsers } from '../actions/auth';
@@ -30,3 +30,16 @@ export const getAllTweets = () => async (dispatch) => {
   }
 };
 
+// @route    POST /tweet/new
+// @desc     CREATE A TWEET
+// @access   Private
+export const createTweet = (formData) => async (dispatch) => {
+  try {
+    const res = await api.post('tweet/new', formData);
+    dispatch({
+      type: CREATE_TWEET,
+      payload: res.data,
+    });
+    dispatch(getAllTweets());
+  } catch (error) {}
+};

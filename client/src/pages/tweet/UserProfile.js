@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { createTweet } from '../../redux/actions/tweet';
 
 // generate random number
 function getRandomInt(max) {
@@ -11,18 +12,25 @@ function getRandomInt(max) {
 }
 
 const UserProfile = ({ user }) => {
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const { avatar, username, date } = user;
+  const { avatar, username, date, _id } = user;
   const [tweet, setTweet] = useState();
   const randomNumber = getRandomInt(90);
+  const [showInput, setShowInput] = useState(false);
 
   console.log(tweet);
+  console.log(_id);
 
   function onSubmit(e) {
     e.preventDefault();
-    // Note dispatch tweet
-    console.log('woork');
+    const tweetData = {
+      userID: _id,
+      message: tweet,
+    };
+    dispatch(createTweet(tweetData));
     setTweet('');
+    setShowInput(!showInput);
   }
 
   return (
@@ -43,8 +51,9 @@ const UserProfile = ({ user }) => {
               background: 'var(--color-blue)',
               color: 'var(--color-white)',
             }}
+            onClick={() => setShowInput(!showInput)}
           >
-            Create Tweet
+            {!showInput ? 'Create Tweet' : 'Close Tweet'}
           </button>
         ) : (
           <button>Follow</button>
@@ -61,15 +70,17 @@ const UserProfile = ({ user }) => {
       </div>
 
       {/* create tweet input */}
-      <form onSubmit={onSubmit}>
-        <textarea
-          type='text'
-          value={tweet}
-          name='tweet'
-          onChange={(e) => setTweet(e.target.value)}
-        />
-        <input type='submit' />
-      </form>
+      {showInput && (
+        <form onSubmit={onSubmit}>
+          <textarea
+            type='text'
+            value={tweet}
+            name='tweet'
+            onChange={(e) => setTweet(e.target.value)}
+          />
+          <input type='submit' />
+        </form>
+      )}
     </StyledUserProfile>
   );
 };
@@ -130,7 +141,8 @@ const StyledUserProfile = styled.div`
   form {
     padding: 10px 25px;
 
-    input, textarea {
+    input,
+    textarea {
       border: none;
       border-radius: 10px;
       width: 100%;
@@ -143,12 +155,11 @@ const StyledUserProfile = styled.div`
       margin-bottom: 10px;
     }
 
-    input{
+    input {
       height: 45px;
       background: var(--color-lightBlue);
       color: var(--color-white);
     }
-
   }
 `;
 
