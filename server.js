@@ -2,7 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 
-//Socket IO 
+//Socket io
 require('./socket');
 
 const app = express();
@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 app.use('/register', require('./routes/auth/register'));
 app.use('/login', require('./routes/auth/auth'));
 app.use('/tweet', require('./routes/tweet'));
+app.use('/news', require('./routes/news'));
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
