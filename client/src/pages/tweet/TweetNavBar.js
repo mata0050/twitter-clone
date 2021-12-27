@@ -8,10 +8,10 @@ const TweetNavBar = () => {
       <nav>
         <ul>
           <li>
-            <Link to='..'>Tweets</Link>
+            <Link to='/'>Tweets</Link>
           </li>
           <li>
-            <Link to='..'>News</Link>
+            <Link to='/news'>News</Link>
           </li>
         </ul>
       </nav>

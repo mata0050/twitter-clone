@@ -1,7 +1,7 @@
 import { GET_NEWS_FAIL, GET_NEWS } from '../actions/types';
 
 const initialState = {
-  allNews: {},
+  allNews: [],
   loading: true,
 };
 

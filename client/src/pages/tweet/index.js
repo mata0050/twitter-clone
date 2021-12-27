@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import TweetNavBar from './TweetNavBar';
 import UserProfile from './UserProfile';
 import TweetsCard from './TweetsCard';
+import NewsCard from './NewsCard';
+import News from './News';
 
 const Tweet = () => {
   const users = useSelector((state) => state.tweet.allUsers);
@@ -25,8 +27,11 @@ const Tweet = () => {
         <>{users.length !== 0 && <UserProfile user={users[0]} />}</>
       )}
       <TweetNavBar />
-      
-      <TweetsCard /> 
+      <Routes>
+        <Route path='/' element={<TweetsCard />} />
+        <Route path='news' element={<NewsCard />} />
+        <Route path='news/:id' element={<News />} />
+      </Routes>
     </div>
   );
 };

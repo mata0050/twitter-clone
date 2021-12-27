@@ -19,7 +19,7 @@ const TweetCard = ({ tweet }) => {
     });
   }, [users]);
 
-  console.log(profile);
+
 
   return (
     <StyledTweet>
@@ -75,6 +75,11 @@ const StyledTweet = styled.div`
       width: 60px;
       border-radius: 60px;
       margin-right: 15px;
+    }
+
+    .content {
+      width: 70%;
+
     }
 
     .content header{

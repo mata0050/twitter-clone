@@ -54,9 +54,7 @@ function App() {
       {/* display content with top, side and bottom navBars */}
       <main>
         <div className='black-bar'></div>
-        <Routes>
-          <Route path='/' element={<Tweet />} />
-        </Routes>
+        <Tweet />
       </main>
       <LeftNavBar />
       <Footer />

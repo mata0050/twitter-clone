@@ -8,7 +8,7 @@ export const getAllNews = () => async (dispatch) => {
 
     dispatch({
       type: GET_NEWS,
-      payload: res.data,
+      payload: res.data.results,
     });
   } catch (err) {
     dispatch({

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = express('axios');
 const https = require('https');
 
 // @route    GET /latest
@@ -20,7 +19,6 @@ router.get('/latest', async (req, res) => {
 
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-          console.log(JSON.parse(data).explanation);
           res.json(JSON.parse(data));
         });
       }
