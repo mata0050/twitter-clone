@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -6,11 +7,11 @@ import { useSelector } from 'react-redux';
 // Components
 import TweetNavBar from './TweetNavBar';
 import UserProfile from './UserProfile';
-import TweetCard from './TweetCard';
+import TweetsCard from './TweetsCard';
 
 const Tweet = () => {
   const users = useSelector((state) => state.tweet.allUsers);
-  const tweets = useSelector((state) => state.tweet.tweets);
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
 
@@ -24,14 +25,8 @@ const Tweet = () => {
         <>{users.length !== 0 && <UserProfile user={users[0]} />}</>
       )}
       <TweetNavBar />
-
-      {tweets.length !== 0 && (
-        <>
-          {tweets.map((tweet) => (
-            <TweetCard tweet={tweet} />
-          ))}
-        </>
-      )}
+      
+      <TweetsCard /> 
     </div>
   );
 };

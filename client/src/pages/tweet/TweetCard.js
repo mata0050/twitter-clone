@@ -20,6 +20,7 @@ const TweetCard = ({ tweet }) => {
   }, [users]);
 
   console.log(profile);
+
   return (
     <StyledTweet>
       <article>
