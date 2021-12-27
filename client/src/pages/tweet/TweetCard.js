@@ -4,11 +4,13 @@ import moment from 'moment';
 
 // Redux
 import { useSelector } from 'react-redux';
+import CommentCard from './CommentCard';
 
 const TweetCard = ({ tweet }) => {
   const { message, date, userID, comment, like, disLike } = tweet;
   const users = useSelector((state) => state.tweet.allUsers);
   const [profile, setProfile] = useState(null);
+  const [showComment, setShowComment] = useState(false);
 
   // Get user profile
   useEffect(() => {
@@ -18,8 +20,6 @@ const TweetCard = ({ tweet }) => {
       }
     });
   }, [users]);
-
-
 
   return (
     <StyledTweet>
@@ -41,7 +41,7 @@ const TweetCard = ({ tweet }) => {
           <p>{message}</p>
 
           <footer>
-            <div className='comment'>
+            <div className='comment' onClick={() => setShowComment(!showComment)}>
               <i class='far fa-comments'></i>
               <span>{comment.length}</span>
             </div>
@@ -56,6 +56,9 @@ const TweetCard = ({ tweet }) => {
               <span>{disLike.length}</span>
             </div>
           </footer>
+
+          {/* comment card */}
+          {showComment && <CommentCard />}
         </div>
       </article>
     </StyledTweet>
