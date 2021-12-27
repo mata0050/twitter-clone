@@ -16,9 +16,15 @@ export const getAllTweets = () => async (dispatch) => {
   try {
     const res = await api.get('tweet');
 
+    const orderedTweets = res.data.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+ 
+
     dispatch({
       type: GET_ALL_TWEETS,
-      payload: res.data,
+      payload: orderedTweets,
     });
 
     // Gets all the users
