@@ -6,6 +6,7 @@ import { StyledLink } from '../css/LinkButtonsStyle';
 
 // Redux
 import { useSelector } from 'react-redux';
+import Alert from './Alert';
 
 const NavBar = () => {
   const username = useSelector((state) => state.auth.username);
@@ -21,37 +22,43 @@ const NavBar = () => {
   console.log(userTweets);
 
   return (
-    <StyledNavBar>
-      <i class='fas fa-arrow-left'></i>
-      <div className='account-name'>
-        <span>{username !== null ? `@${username}` : 'Tweeter'}</span>
-        <span>
-          {allTweets.length === 0
-            ? 'Welcome to Tweeter'
-            : `${userTweets} Tweets`}
-        </span>
-      </div>
-      {!isAuthenticated && (
-        <StyledLink flex='0.3' to='..'>
-          Log in
-        </StyledLink>
-      )}
-    </StyledNavBar>
+    <StyleContainer>
+      <StyledNavBar>
+        <i class='fas fa-arrow-left'></i>
+        <div className='account-name'>
+          <span>{username !== null ? `@${username}` : 'Tweeter'}</span>
+          <span>
+            {allTweets.length === 0
+              ? 'Welcome to Tweeter'
+              : `${userTweets} Tweets`}
+          </span>
+        </div>
+        {!isAuthenticated && (
+          <StyledLink flex='0.3' to='..'>
+            Log in
+          </StyledLink>
+        )}
+      </StyledNavBar>
+      <Alert />
+    </StyleContainer>
   );
 };
 
-const StyledNavBar = styled.div`
+const StyleContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
   width: calc(100vw - 70px);
-  height: 65px;
   border-bottom: 1px solid var(--color-lightGrey);
+  background: hsla(0, 0%, 0%, 0.5);
+  z-index: 2;
+`;
+
+const StyledNavBar = styled.div`
+height: 65px;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  z-index: 2;
-  background: hsla(0, 0%, 0%, 0.5);
 
   .account-name {
     display: flex;

@@ -11,6 +11,7 @@ import TweetsCard from './TweetsCard';
 import NewsCard from './NewsCard';
 import News from './News';
 
+
 const Tweet = () => {
   const users = useSelector((state) => state.tweet.allUsers);
 
@@ -23,6 +24,7 @@ const Tweet = () => {
     <div>
       {isAuthenticated && <>{user !== null && <UserProfile user={user} />}</>}
       <TweetNavBar />
+
       <Routes>
         <Route path='/' element={<TweetsCard />} />
         <Route path='news' element={<NewsCard />} />

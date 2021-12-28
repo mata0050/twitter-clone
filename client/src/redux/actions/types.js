@@ -21,3 +21,4 @@ export const GET_NEWS_FAIL = 'GET_NEWS_FAIL';
 export const CREATE_TWEET = 'CREATE_TWEET';
 export const GET_ALL_TWEETS = 'GET_ALL_TWEETS';
 export const GET_ALL_TWEETS_FAIL = 'GET_ALL_TWEETS_FAIL';
+export const CREATE_COMMENT = 'CREATE_COMMENT';

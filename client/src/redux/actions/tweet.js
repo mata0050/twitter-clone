@@ -4,9 +4,10 @@ import {
   GET_ALL_TWEETS,
   GET_ALL_TWEETS_FAIL,
   CREATE_TWEET,
+  CREATE_COMMENT,
 } from '../actions/types';
 
-import { getAllUsers } from '../actions/auth';
+import { setAlert } from '../actions/alert';
 
 // @route    GET /tweet
 // @desc     Get all tweets
@@ -20,8 +21,6 @@ export const getAllTweets = () => async (dispatch) => {
       return new Date(b.date) - new Date(a.date);
     });
 
- 
-
     dispatch({
       type: GET_ALL_TWEETS,
       payload: orderedTweets,
@@ -33,6 +32,9 @@ export const getAllTweets = () => async (dispatch) => {
     dispatch({
       type: GET_ALL_TWEETS_FAIL,
     });
+    dispatch(
+      setAlert('Please reload the page something went wrong', 'warning')
+    );
   }
 };
 
@@ -47,5 +49,28 @@ export const createTweet = (formData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(getAllTweets());
-  } catch (error) {}
+  } catch (error) {
+    dispatch(
+      setAlert('Sorry could not create a tweet, please try again', 'danger')
+    );
+  
+  }
+};
+
+// @route    PuT /tweet/comment
+// @desc     CREATE A COMMENT
+// @access   Private
+export const createComment = (formData) => async (dispatch) => {
+  try {
+    const res = await api.put('tweet/comment', formData);
+    dispatch({
+      type: CREATE_COMMENT,
+      payload: res.data,
+    });
+    dispatch(getAllTweets());
+  } catch (error) {
+    dispatch(
+      setAlert('Sorry could not add comment, please try again', 'danger')
+    );
+  }
 };

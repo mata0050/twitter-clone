@@ -3,14 +3,19 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setAlert } from '../../redux/actions/alert';
+
+// Components
 import CommentCard from './CommentCard';
 
 const TweetCard = ({ tweet }) => {
   const { message, date, userID, comment, like, disLike } = tweet;
   const users = useSelector((state) => state.tweet.allUsers);
+  const isAuthenticated = true;
   const [profile, setProfile] = useState(null);
-  const [showComment, setShowComment] = useState(false);
+  const [showComment, setShowComment] = useState(true);
+  const dispatch = useDispatch();
 
   // Get user profile
   useEffect(() => {
@@ -20,6 +25,13 @@ const TweetCard = ({ tweet }) => {
       }
     });
   }, [users]);
+
+  const onClickHandler = () => {
+    if (!isAuthenticated) {
+      dispatch(setAlert('login to comment on a tweet', 'danger'));
+    }
+    setShowComment(!showComment);
+  };
 
   return (
     <StyledTweet>
@@ -41,7 +53,7 @@ const TweetCard = ({ tweet }) => {
           <p>{message}</p>
 
           <footer>
-            <div className='comment' onClick={() => setShowComment(!showComment)}>
+            <div className='comment' onClick={onClickHandler}>
               <i class='far fa-comments'></i>
               <span>{comment.length}</span>
             </div>
@@ -58,7 +70,7 @@ const TweetCard = ({ tweet }) => {
           </footer>
 
           {/* comment card */}
-          {showComment && <CommentCard />}
+          {showComment && isAuthenticated && <CommentCard />}
         </div>
       </article>
     </StyledTweet>

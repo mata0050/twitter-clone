@@ -19,6 +19,7 @@ import Login from './pages/auth/Login';
 import Tweet from './pages/tweet';
 import Profile from './pages/profile';
 
+
 function App() {
   const dispatch = useDispatch();
   const socket = io('http://localhost:8001');
@@ -54,6 +55,7 @@ function App() {
       {/* display content with top, side and bottom navBars */}
       <main>
         <div className='black-bar'></div>
+      
         <Tweet />
       </main>
       <LeftNavBar />

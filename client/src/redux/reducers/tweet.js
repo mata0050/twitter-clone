@@ -4,6 +4,7 @@ import {
   ALL_USER_LOADED,
   ALL_USER_FAILED,
   CREATE_TWEET,
+  CREATE_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -43,6 +44,7 @@ const tweets = (state = initialState, action) => {
       };
 
     case CREATE_TWEET:
+    case CREATE_COMMENT:
       return {
         ...state,
         loading: false,

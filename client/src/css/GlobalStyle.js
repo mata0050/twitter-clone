@@ -94,6 +94,10 @@ button {
   color: #fff
 }
 
+.alert-warning {
+  background: var(--color-warning);
+}
+
 
 /* margins */
 .mb-3{
