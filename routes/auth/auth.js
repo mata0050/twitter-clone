@@ -55,7 +55,6 @@ router.post(
 
     try {
       let user = await User.findOne({ email });
-  
 
       if (!user) {
         return res
@@ -86,6 +85,60 @@ router.post(
           res.json({ token, email: user.email });
         }
       );
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
+// @desc     Update user profile
+// @route    PUT /
+// @access   Private
+router.put(
+  '/',
+  [check('currentPassword', 'Password is required').exists()],
+  auth,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { email, currentPassword, password, username, avatar } = req.body;
+
+    try {
+      let user = await User.findOne({ email });
+
+      if (!user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      if (email) user.email = email;
+      if (password) user.password = password;
+      if (username) user.username = username;
+      if (avatar) user.avatar = avatar;
+
+      // // encryption
+      if (password) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+      }
+
+      await user.save();
+
+      res.json({ success: [{ msg: 'Profile Update was successful' }] });
+
+      // res.json(user)
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
