@@ -11,13 +11,6 @@ const CommentCard = ({ tweet, showComment, setShowComment }) => {
   const [comment, setComment] = useState('');
   const userId = useSelector((state) => state.auth.userId);
 
-  if (comment) {
-    console.log({
-      tweetID: tweet._id,
-      comment,
-      userID: userId,
-    });
-  }
 
   const onSubmitHandler = (e) => {
     e.preventDefault();

@@ -33,6 +33,7 @@ const TweetCard = ({ tweet }) => {
     setShowComment(!showComment);
   };
 
+  console.log(users.filter((user) => user._id === '61bd05cde0d274c7d4b14a9f'));
   return (
     <StyledTweet>
       <article>
@@ -69,8 +70,34 @@ const TweetCard = ({ tweet }) => {
             </div>
           </footer>
 
-          {/* comment card */}
-          {showComment && isAuthenticated && <CommentCard tweet={tweet} showComment={showComment} setShowComment={setShowComment}/>}
+          {/* comment form */}
+          {showComment && isAuthenticated && (
+            <CommentCard
+              tweet={tweet}
+              showComment={showComment}
+              setShowComment={setShowComment}
+            />
+          )}
+
+          {tweet.comment.length !== 0 && showComment &&<h3>All Comments</h3>}
+          {/* show comments */}
+          {tweet.comment.length !== 0 && showComment &&
+            tweet.comment.map((item) => (
+              <div className='show-comment'>
+                {users
+                  .filter((user) => user._id === item.userID)
+                  .map((user) => (
+                    <div className='user-comment'>
+                      <img
+                        src={user.avatar}
+                        alt={`user name is ${user.username}`}
+                      />
+                      <span>{user.username}</span>
+                    </div>
+                  ))}
+                <p>{item.comment}</p>
+              </div>
+            ))}
         </div>
       </article>
     </StyledTweet>
@@ -139,6 +166,32 @@ const StyledTweet = styled.div`
       color: var(--color-blue);
       cursor: pointer;
    
+    }
+  }
+
+  h3{
+    margin: 20px 0;
+  }
+
+  .show-comment{
+    border: 1px solid var(--color-lightGrey);
+    padding: 8px;
+    margin: 15px 0;
+    border-radius: 5px;
+
+    .user-comment{
+      display: flex;
+      margin-bottom: 10px ;
+
+      span{
+        font-size:.9rem;
+      }
+
+      img{
+        width: 30px;
+        height: 30px;
+      }
+
     }
   }
 
