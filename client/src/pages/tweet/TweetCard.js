@@ -5,14 +5,17 @@ import moment from 'moment';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setAlert } from '../../redux/actions/alert';
+import { addLike, disLikeTweet } from '../../redux/actions/tweet';
 
 // Components
 import CommentCard from './CommentCard';
+import ShowComments from './ShowComments';
 
 const TweetCard = ({ tweet }) => {
   const { message, date, userID, comment, like, disLike } = tweet;
   const users = useSelector((state) => state.tweet.allUsers);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userId = useSelector((state) => state.auth.userId);
   const [profile, setProfile] = useState(null);
   const [showComment, setShowComment] = useState(false);
   const dispatch = useDispatch();
@@ -26,6 +29,7 @@ const TweetCard = ({ tweet }) => {
     });
   }, [users]);
 
+  // hide and show comment section
   const onClickHandler = () => {
     if (!isAuthenticated) {
       dispatch(setAlert('login to comment on a tweet', 'danger'));
@@ -33,7 +37,36 @@ const TweetCard = ({ tweet }) => {
     setShowComment(!showComment);
   };
 
-  console.log(users.filter((user) => user._id === '61bd05cde0d274c7d4b14a9f'));
+  // add Like to tweet
+  const addLikeHandler = () => {
+    if (userId !== null) {
+      dispatch(
+        addLikeHandler({
+          tweetID: tweet._id,
+          userID: userId,
+        })
+      );
+    }
+
+    dispatch(setAlert('Please Login to add a Like to a tweet', 'danger'));
+  };
+
+
+    // add Like to tweet
+    const disLikeTweet = () => {
+      if (userId !== null) {
+        dispatch(
+          disLikeTweet({
+            tweetID: tweet._id,
+            userID: userId,
+          })
+        );
+      }
+  
+      dispatch(setAlert('Please Login to add a DisLike to a tweet', 'danger'));
+    };
+  
+
   return (
     <StyledTweet>
       <article>
@@ -59,12 +92,12 @@ const TweetCard = ({ tweet }) => {
               <span>{comment.length}</span>
             </div>
 
-            <div className='like'>
+            <div className='like' onClick={addLikeHandler}>
               <i class='far fa-heart'></i>
               <span>{like.length}</span>
             </div>
 
-            <div className='dislike'>
+            <div className='dislike' onClick={disLikeTweet}>
               <i class='far fa-thumbs-down'></i>
               <span>{disLike.length}</span>
             </div>
@@ -79,25 +112,10 @@ const TweetCard = ({ tweet }) => {
             />
           )}
 
-          {tweet.comment.length !== 0 && showComment &&<h3>All Comments</h3>}
           {/* show comments */}
-          {tweet.comment.length !== 0 && showComment &&
-            tweet.comment.map((item) => (
-              <div className='show-comment'>
-                {users
-                  .filter((user) => user._id === item.userID)
-                  .map((user) => (
-                    <div className='user-comment'>
-                      <img
-                        src={user.avatar}
-                        alt={`user name is ${user.username}`}
-                      />
-                      <span>{user.username}</span>
-                    </div>
-                  ))}
-                <p>{item.comment}</p>
-              </div>
-            ))}
+          {tweet.comment.length !== 0 && showComment && (
+            <ShowComments users={users} tweet={tweet} />
+          )}
         </div>
       </article>
     </StyledTweet>
@@ -173,27 +191,7 @@ const StyledTweet = styled.div`
     margin: 20px 0;
   }
 
-  .show-comment{
-    border: 1px solid var(--color-lightGrey);
-    padding: 8px;
-    margin: 15px 0;
-    border-radius: 5px;
 
-    .user-comment{
-      display: flex;
-      margin-bottom: 10px ;
-
-      span{
-        font-size:.9rem;
-      }
-
-      img{
-        width: 30px;
-        height: 30px;
-      }
-
-    }
-  }
 
 
 `;

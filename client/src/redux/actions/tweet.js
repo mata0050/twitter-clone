@@ -5,6 +5,8 @@ import {
   GET_ALL_TWEETS_FAIL,
   CREATE_TWEET,
   CREATE_COMMENT,
+  ADD_LIKE,
+  DISLIKE_TWEET
 } from '../actions/types';
 
 import { setAlert } from '../actions/alert';
@@ -53,11 +55,10 @@ export const createTweet = (formData) => async (dispatch) => {
     dispatch(
       setAlert('Sorry could not create a tweet, please try again', 'danger')
     );
-  
   }
 };
 
-// @route    PuT /tweet/comment
+// @route    PUT /tweet/comment
 // @desc     CREATE A COMMENT
 // @access   Private
 export const createComment = (formData) => async (dispatch) => {
@@ -72,5 +73,42 @@ export const createComment = (formData) => async (dispatch) => {
     dispatch(
       setAlert('Sorry could not add comment, please try again', 'danger')
     );
+  }
+};
+
+// @route    PUT /tweet/like
+// @desc     ADD A LIKE
+// @access   Private
+export const addLike = (formData) => async (dispatch) => {
+  try {
+    const res = await api.put('tweet/like', formData);
+    dispatch({
+      type: ADD_LIKE,
+      payload: res.data,
+    });
+    dispatch(getAllTweets());
+  } catch (error) {
+    // dispatch(
+    //   setAlert('Sorry could not add comment, please try again', 'danger')
+    // );
+  }
+};
+
+
+// @route    PUT /tweet/dislike
+// @desc     ADD A LIKE
+// @access   Private
+export const disLikeTweet = (formData) => async (dispatch) => {
+  try {
+    const res = await api.put('tweet/dislike', formData);
+    dispatch({
+      type: DISLIKE_TWEET,
+      payload: res.data,
+    });
+    dispatch(getAllTweets());
+  } catch (error) {
+    // dispatch(
+    //   setAlert('Sorry could not add comment, please try again', 'danger')
+    // );
   }
 };
