@@ -17,17 +17,16 @@ import Landing from './pages/Landing';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import Tweet from './pages/tweet';
-
+import Profile from './pages/profile';
 
 function App() {
   const dispatch = useDispatch();
-  const socket = io('http://localhost:8001')
+  const socket = io('http://localhost:8001');
   socket.on('connect', () => {
-    console.log(`You connected with id ${socket.id}`)
+    console.log(`You connected with id ${socket.id}`);
     // emit will send to use to send tweet
-    socket.emit('custom-event', {a: 'hellloo'})
-  })
-
+    socket.emit('custom-event', { a: 'hellloo' });
+  });
 
   // Note
   //will reload to get new tweets every 60 seconds
@@ -35,7 +34,7 @@ function App() {
     dispatch(getAllTweets());
     dispatch(getAllUsers());
     dispatch(getAllNews());
-    dispatch(loadUser())
+    dispatch(loadUser());
     // setInterval(() => {
     //   dispatch(getAllTweets());
     //   dispatch(getAllUsers());
@@ -47,6 +46,7 @@ function App() {
       <NavBar />
       {/* display content without navigation bars*/}
       <Routes>
+        <Route path='profile' element={<Profile />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
       </Routes>

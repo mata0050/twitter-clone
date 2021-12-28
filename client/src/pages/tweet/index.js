@@ -21,11 +21,7 @@ const Tweet = () => {
 
   return (
     <div>
-      {isAuthenticated ? (
-        <>{user !== null && <UserProfile user={user} />}</>
-      ) : (
-        <>{users.length !== 0 && <UserProfile user={users[0]} />}</>
-      )}
+      {isAuthenticated && <>{user !== null && <UserProfile user={user} />}</>}
       <TweetNavBar />
       <Routes>
         <Route path='/' element={<TweetsCard />} />

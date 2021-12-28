@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const LeftNavBar = () => {
   return (
     <StyledNavBar>
-      <i class="fab fa-twitter"></i>
+      <i class='fab fa-twitter'></i>
       <i class='far fa-search'></i>
-      <i class="fas fa-cog"></i>
+      <Link to='profile'>
+        <i class='fas fa-cog' />
+      </Link>
     </StyledNavBar>
   );
 };
@@ -23,8 +26,15 @@ const StyledNavBar = styled.div`
   align-items: center;
   padding-top: 1rem;
 
+  a {
+    color: var(--color-white);
+  }
 
-  i{
+  a:hover {
+    color: var(--color-blue);
+  }
+
+  i {
     font-size: 1.6rem;
     margin-bottom: 2rem;
   }

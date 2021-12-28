@@ -1,11 +1,121 @@
-import React from 'react'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Navigate } from 'react-router-dom';
 
-const index = () => {
+// CSS
+import { StyledInput } from '../../css/LinkButtonsStyle';
+import StyledRegister from '../../css/StyledRegister';
+
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setAlert } from '../../redux/actions/alert';
+import { registerUser } from '../../redux/actions/auth';
+import { getAllTweets } from '../../redux/actions/tweet';
+// Components
+import Alert from '../../components/Alert';
+import AuthNavBar from '../../components/AuthNavBar';
+
+const Profile = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+    currentPassword: '',
+    email: '',
+  });
+
+  const { username, password, confirmPassword,  currentPassword, email } = formData;
+
+  const onChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (password !== confirmPassword) {
+      return dispatch(setAlert('Password is not matching', 'danger'));
+    }
+
+    if (username === '') {
+      return dispatch(setAlert('Enter Username', 'danger'));
+    }
+
+    if (email === '') {
+      return dispatch(setAlert('Enter Enter', 'danger'));
+    }
+
+    const data = {
+      username,
+      password,
+      email,
+    };
+
+    dispatch(registerUser(data));
+  };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Navigate to='/' />;
+  }
+
   return (
-    <div>
-      <h1>Profile</h1>
-    </div>
-  )
-}
+    <StyledRegister>
+      <div className='register'>
+        {/*   navbar    */}
+        <AuthNavBar />
 
-export default index
+        <h2>Update Profile</h2>
+        <Alert />
+
+        <form onSubmit={onSubmit}>
+          <StyledInput
+            type='text'
+            name='username'
+            placeholder='Username'
+            value={username}
+            onChange={onChange}
+          />
+          <StyledInput
+            type='email'
+            name='email'
+            placeholder='Email'
+            value={email}
+            onChange={onChange}
+          />
+          <p style={{ marginBottom: '10px' }}>Enter New password</p>
+          <StyledInput
+            type='password'
+            name='password'
+            placeholder='Password'
+            value={password}
+            onChange={onChange}
+          />
+          <StyledInput
+            type='password'
+            placeholder='Confirm Password'
+            name='confirmPassword'
+            value={confirmPassword}
+            onChange={onChange}
+          />
+
+          <p style={{ marginBottom: '10px', marginTop: '10px' }}>Current password</p>
+          <StyledInput
+            type='password'
+            name='currentPassword'
+            placeholder='Current Password'
+            value={currentPassword}
+            onChange={onChange}
+          />
+          <StyledInput type='submit' value='Update Profile' />
+        </form>
+      </div>
+    </StyledRegister>
+  );
+};
+
+export default Profile;
