@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // CSS styles
 import { StyledLink } from '../css/LinkButtonsStyle';
@@ -9,22 +10,24 @@ import { useSelector } from 'react-redux';
 import Alert from './Alert';
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const username = useSelector((state) => state.auth.username);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userId = useSelector((state) => state.auth.userId);
   const allTweets = useSelector((state) => state.tweet.tweets);
+  const location = useLocation();
 
   // all the users Tweeters
   const userTweets =
     allTweets.length !== 0 &&
     allTweets.filter((t) => t.userID === userId).length;
 
-  console.log(userTweets);
-
   return (
     <StyleContainer>
       <StyledNavBar>
-        <i class='fas fa-arrow-left'></i>
+        {location.pathname !== '/' && (
+          <i class='fas fa-arrow-left' onClick={() => navigate(-1)}></i>
+        )}
         <div className='account-name'>
           <span>{username !== null ? `@${username}` : 'Tweeter'}</span>
           <span>
@@ -55,10 +58,17 @@ const StyleContainer = styled.div`
 `;
 
 const StyledNavBar = styled.div`
-height: 65px;
+  height: 65px;
   display: flex;
   align-items: center;
   padding: 0 20px;
+  i{
+    cursor: pointer;
+  }
+
+  i:hover{
+    color: var(--color-blue);
+  }
 
   .account-name {
     display: flex;

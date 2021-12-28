@@ -51,9 +51,9 @@ const TweetCard = ({ tweet }) => {
   };
 
   // add Like to tweet
-  const disLikeTweet = () => {
+  const disLikeTweetHandler = () => {
     if (userId !== null) {
-      dispatch(
+      return dispatch(
         disLikeTweet({
           tweetID: tweet._id,
           userID: userId,
@@ -96,7 +96,7 @@ const TweetCard = ({ tweet }) => {
               <span>{like.length}</span>
             </div>
 
-            <div className='dislike' onClick={disLikeTweet}>
+            <div className='dislike' onClick={disLikeTweetHandler}>
               <i class='far fa-thumbs-down'></i>
               <span>{disLike.length}</span>
             </div>
@@ -191,7 +191,7 @@ const StyledTweet = styled.div`
     cursor: pointer;
   }
 
-  
+
   h3{
     margin: 20px 0;
   }
