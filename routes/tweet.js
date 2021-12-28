@@ -106,17 +106,14 @@ router.put('/like', auth, async (req, res) => {
 
   try {
     let tweet = await Tweet.findById({ _id: tweetID });
-    const likes = tweet.like;
 
-    // if (likes.length !== 0) {
-    //   likes.forEach((user) => {
-    //     if (userID.toString() === userID) {
-    //       return res.status(400).json({
-    //         errors: [{ msg: 'You already liked this tweet' }],
-    //       });
-    //     }
-    //   });
-    // }
+    const likes = tweet.like;
+    const isMatch = await Tweet.findOne({ 'like.userID': userID });
+
+    //allow user to add one like only
+    if (isMatch) {
+      return res.send('error');
+    }
 
     likes.push({
       userID,
@@ -143,6 +140,13 @@ router.put('/dislike', auth, async (req, res) => {
 
   try {
     let tweet = await Tweet.findById({ _id: tweetID });
+    const isMatch = await Tweet.findOne({ 'like.userID': userID });
+
+    //allow user to add one like only
+    if (isMatch) {
+      return res.send('error');
+    }
+
     tweet.disLike.push({
       userID,
     });
