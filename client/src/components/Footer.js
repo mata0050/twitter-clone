@@ -3,11 +3,28 @@ import styled from 'styled-components';
 
 // CSS styles
 import { StyledLink } from '../css/LinkButtonsStyle';
+
+// Redux
+import { useSelector } from 'react-redux';
+
 const Footer = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  console.log(isAuthenticated);
   return (
     <StyledFooter>
-      <StyledLink to='/login'>Log in</StyledLink>
-      <StyledLink to='/register'>Sign Up</StyledLink>
+      {isAuthenticated ? (
+        <>
+          {' '}
+          <StyledLink to='..'></StyledLink>
+          <StyledLink to='..'>Log out</StyledLink>
+        </>
+      ) : (
+        <>
+          <StyledLink to='/login'>Log in</StyledLink>
+          <StyledLink to='/register'>Sign Up</StyledLink>
+        </>
+      )}
     </StyledFooter>
   );
 };
