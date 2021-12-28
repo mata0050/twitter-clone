@@ -12,9 +12,9 @@ import CommentCard from './CommentCard';
 const TweetCard = ({ tweet }) => {
   const { message, date, userID, comment, like, disLike } = tweet;
   const users = useSelector((state) => state.tweet.allUsers);
-  const isAuthenticated = true;
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [profile, setProfile] = useState(null);
-  const [showComment, setShowComment] = useState(true);
+  const [showComment, setShowComment] = useState(false);
   const dispatch = useDispatch();
 
   // Get user profile
@@ -70,7 +70,7 @@ const TweetCard = ({ tweet }) => {
           </footer>
 
           {/* comment card */}
-          {showComment && isAuthenticated && <CommentCard />}
+          {showComment && isAuthenticated && <CommentCard tweet={tweet} showComment={showComment} setShowComment={setShowComment}/>}
         </div>
       </article>
     </StyledTweet>

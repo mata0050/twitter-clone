@@ -34,7 +34,7 @@ const NavBar = () => {
           </span>
         </div>
         {!isAuthenticated && (
-          <StyledLink flex='0.3' to='..'>
+          <StyledLink flex='0.3' to='/login'>
             Log in
           </StyledLink>
         )}

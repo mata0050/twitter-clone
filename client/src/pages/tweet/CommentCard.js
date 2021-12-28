@@ -1,12 +1,45 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const CommentCard = () => {
-  const [comment, setComment] = useState();
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { createComment } from '../../redux/actions/tweet';
+import { setAlert } from '../../redux/actions/alert';
+
+const CommentCard = ({ tweet, showComment, setShowComment }) => {
+  const dispatch = useDispatch();
+  const [comment, setComment] = useState('');
+  const userId = useSelector((state) => state.auth.userId);
+
+  if (comment) {
+    console.log({
+      tweetID: tweet._id,
+      comment,
+      userID: userId,
+    });
+  }
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (comment) {
+      dispatch(
+        createComment({
+          tweetID: tweet._id,
+          comment,
+          userID: userId,
+        })
+      );
+      setShowComment(!showComment);
+
+    } else {
+      dispatch(setAlert('Please enter a comment', 'danger'));
+      setShowComment(!showComment);
+    }
+  };
 
   return (
     <StyledComment>
-      <form onSubmit=''>
+      <form onSubmit={onSubmitHandler}>
         <textarea
           type='text'
           value={comment}
@@ -14,16 +47,14 @@ const CommentCard = () => {
           onChange={(e) => setComment(e.target.value)}
         />
 
-        <input type='submit' value='Comment'/>
+        <input type='submit' value='Comment' />
       </form>
     </StyledComment>
   );
 };
 
 const StyledComment = styled.div`
-
-
-form {
+  form {
     padding: 20px 0;
 
     input,
@@ -45,6 +76,7 @@ form {
       background: var(--color-lightBlue);
       color: var(--color-white);
     }
-  }`;
+  }
+`;
 
 export default CommentCard;
