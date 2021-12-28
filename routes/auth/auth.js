@@ -128,7 +128,7 @@ router.put(
       if (username) user.username = username;
       if (avatar) user.avatar = avatar;
 
-      // // encryption
+      // encryption
       if (password) {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);

@@ -9,8 +9,8 @@ import StyledRegister from '../../css/StyledRegister';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../redux/actions/alert';
-import { registerUser } from '../../redux/actions/auth';
-import { getAllTweets } from '../../redux/actions/tweet';
+import { updateUser } from '../../redux/actions/auth';
+
 // Components
 import Alert from '../../components/Alert';
 import AuthNavBar from '../../components/AuthNavBar';
@@ -24,10 +24,18 @@ const Profile = () => {
     password: '',
     confirmPassword: '',
     currentPassword: '',
+    avatar: '',
     email: '',
   });
 
-  const { username, password, confirmPassword,  currentPassword, email } = formData;
+  const {
+    username,
+    password,
+    confirmPassword,
+    currentPassword,
+    email,
+    avatar,
+  } = formData;
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -53,9 +61,11 @@ const Profile = () => {
       username,
       password,
       email,
+      avatar,
+      currentPassword,
     };
 
-    dispatch(registerUser(data));
+    dispatch(updateUser(data));
   };
 
   // Redirect if logged in
@@ -87,7 +97,16 @@ const Profile = () => {
             value={email}
             onChange={onChange}
           />
-          <p style={{ marginBottom: '10px' }}>Enter New password</p>
+          <StyledInput
+            type='text'
+            name='avatar'
+            placeholder='Avatar'
+            value={avatar}
+            onChange={onChange}
+          />
+          <p style={{ marginBottom: '10px', marginTop: '30px' }}>
+            Enter New password
+          </p>
           <StyledInput
             type='password'
             name='password'
@@ -103,13 +122,16 @@ const Profile = () => {
             onChange={onChange}
           />
 
-          <p style={{ marginBottom: '10px', marginTop: '10px' }}>Current password</p>
+          <p style={{ marginBottom: '10px', marginTop: '30px' }}>
+            Current password
+          </p>
           <StyledInput
             type='password'
             name='currentPassword'
             placeholder='Current Password'
             value={currentPassword}
             onChange={onChange}
+            required
           />
           <StyledInput type='submit' value='Update Profile' />
         </form>

@@ -11,6 +11,7 @@ import {
   ALL_USER_FAILED,
   LOGIN_USER,
   LOGIN_USER_FAILED,
+  UPDATE_USER_PROFILE,
 } from './types';
 
 // @route    GET /login
@@ -93,5 +94,20 @@ export const loginUser = (formData) => async (dispatch) => {
     }
 
     dispatch({ type: LOGIN_USER_FAILED });
+  }
+};
+
+// @route    PUT /login
+// @desc     Update user profile
+// @access   Private
+export const updateUser = (formData) => async (dispatch) => {
+  try {
+    const res = await api.put('login', formData);
+    dispatch({
+      type: UPDATE_USER_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    // note will dispatch alert error
   }
 };
