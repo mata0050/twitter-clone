@@ -40,32 +40,29 @@ const TweetCard = ({ tweet }) => {
   // add Like to tweet
   const addLikeHandler = () => {
     if (userId !== null) {
+      return dispatch(
+        addLike({
+          tweetID: tweet._id,
+          userID: userId,
+        })
+      );
+    }
+    dispatch(setAlert('Please Login to add a Like to a tweet', 'danger'));
+  };
+
+  // add Like to tweet
+  const disLikeTweet = () => {
+    if (userId !== null) {
       dispatch(
-        addLikeHandler({
+        disLikeTweet({
           tweetID: tweet._id,
           userID: userId,
         })
       );
     }
 
-    dispatch(setAlert('Please Login to add a Like to a tweet', 'danger'));
+    dispatch(setAlert('Please Login to add a DisLike to a tweet', 'danger'));
   };
-
-
-    // add Like to tweet
-    const disLikeTweet = () => {
-      if (userId !== null) {
-        dispatch(
-          disLikeTweet({
-            tweetID: tweet._id,
-            userID: userId,
-          })
-        );
-      }
-  
-      dispatch(setAlert('Please Login to add a DisLike to a tweet', 'danger'));
-    };
-  
 
   return (
     <StyledTweet>
@@ -91,6 +88,8 @@ const TweetCard = ({ tweet }) => {
               <i class='far fa-comments'></i>
               <span>{comment.length}</span>
             </div>
+
+            {/* {console.log('like: ', like)} */}
 
             <div className='like' onClick={addLikeHandler}>
               <i class='far fa-heart'></i>
@@ -177,16 +176,22 @@ const StyledTweet = styled.div`
       }
     }
 
-
+    
+    
     .comment:hover , 
-    .like:hover, 
     .dislike:hover{
       color: var(--color-blue);
       cursor: pointer;
-   
+      
     }
   }
+  
+  .like:hover{
+    color: red;
+    cursor: pointer;
+  }
 
+  
   h3{
     margin: 20px 0;
   }

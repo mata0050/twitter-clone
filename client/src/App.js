@@ -9,19 +9,19 @@ import { getAllUsers, loadUser } from './redux/actions/auth';
 import { getAllNews } from './redux/actions/news';
 import { useDispatch } from 'react-redux';
 
+
 // Components
 import Footer from '../src/components/Footer';
 import LeftNavBar from './components/LeftNavBar';
 import NavBar from './components/NavBar';
-import Landing from './pages/Landing';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import Tweet from './pages/tweet';
 import Profile from './pages/profile';
 
-
 function App() {
   const dispatch = useDispatch();
+
   const socket = io('http://localhost:8001');
   socket.on('connect', () => {
     console.log(`You connected with id ${socket.id}`);
@@ -55,7 +55,8 @@ function App() {
       {/* display content with top, side and bottom navBars */}
       <main>
         <div className='black-bar'></div>
-      
+
+
         <Tweet />
       </main>
       <LeftNavBar />

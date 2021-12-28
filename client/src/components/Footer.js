@@ -15,9 +15,9 @@ const Footer = () => {
     <StyledFooter>
       {isAuthenticated ? (
         <>
-          {' '}
-          <StyledLink to='..'></StyledLink>
-          <StyledLink to='..'>Log out</StyledLink>
+          <StyledLink to='..' style={{ flex: 0.5 }}>
+            Log out
+          </StyledLink>
         </>
       ) : (
         <>

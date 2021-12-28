@@ -18,6 +18,7 @@ import AuthNavBar from '../../components/AuthNavBar';
 const Profile = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // const userProfile = useSelector((state) => state.auth.user);
 
   const [formData, setFormData] = useState({
     username: '',
@@ -36,6 +37,9 @@ const Profile = () => {
     email,
     avatar,
   } = formData;
+
+  // if(userProfile.username)  username = userProfile.username;
+  // console.log(userProfile);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -69,7 +73,7 @@ const Profile = () => {
   };
 
   // Redirect if logged in
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return <Navigate to='/' />;
   }
 

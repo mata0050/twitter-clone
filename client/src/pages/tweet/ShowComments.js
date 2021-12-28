@@ -9,11 +9,11 @@ const ShowComments = ({users, tweet }) => {
      
       {
         tweet.comment.map((item) => (
-          <div className='show-comment'>
+          <div className='show-comment' key={item._id}>
             {users
               .filter((user) => user._id === item.userID)
               .map((user) => (
-                <div className='user-comment'>
+                <div className='user-comment' key={user._id}>
                   <img
                     src={user.avatar}
                     alt={`user name is ${user.username}`}
