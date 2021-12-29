@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { broadcastTweet, getAllTweets } from '../../redux/actions/tweet';
+import { getAllTweets } from '../../redux/actions/tweet';
 
 // Component
 import TweetCard from './TweetCard';
 import NewsCard from './NewsCard';
+import NewToTweeterCard from '../../components/NewToTweeterCard';
+import YouMightLike from '../../components/YouMightLike';
 
 const TweetsCard = ({ tweet, socket }) => {
   const tweets = useSelector((state) => state.tweet.tweets);
@@ -31,6 +33,8 @@ const TweetsCard = ({ tweet, socket }) => {
       </div>
 
       <div className='width-30'>
+        <NewToTweeterCard/>
+        <YouMightLike/>
         <h1 id='news'>Today's News</h1>
         <NewsCard />
       </div>
@@ -56,8 +60,7 @@ const StyledTweetsCard = styled.div`
       overflow: scroll;
 
       #news {
-        margin-left: 10px;
-        margin-bottom: -30px;
+        text-align: center;
         font-size: 1.7rem;
       }
 

@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 const NewsCard = () => {
   const news = useSelector((state) => state.news.allNews);
 
-
   return (
     <StyledTweet>
       {news.length !== 0 &&
@@ -28,24 +27,29 @@ const NewsCard = () => {
             {/* <p>{item.full_description}</p> */}
 
             <Link to={`/news/${item.title}`}>Read More</Link>
-
           </article>
         ))}
 
       {news.length === 0 && (
-        <h3 style={{marginTop: '40px', fontWeight: '500'}}>Sorry, we are using a free news api and it has limited requests. That's why you can't see the News Section.</h3>
+        <h3 style={{ marginTop: '40px', fontWeight: '500' }}>
+          Sorry, we are using a free news api and it has limited requests.
+          That's why you can't see the News Section.
+        </h3>
       )}
     </StyledTweet>
   );
 };
 
 const StyledTweet = styled.div`
-  padding: 25px;
+  margin: 35px;
 
+  
   article {
-    border-bottom: 1px solid var(--color-lightGrey);
-    margin: 0 -25px;
+    background: #15181c;
+    border-radius: 15px;
+    border: 1px solid var(--color-lightGrey);
     padding: 25px;
+    margin-bottom: 25px;
 
     header {
       margin-bottom: 8px;
