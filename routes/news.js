@@ -8,7 +8,7 @@ const https = require('https');
 router.get('/latest', async (req, res) => {
   https
     .get(
-      'https://newsdata.io/api/1/news?apikey=pub_2945c46c381d92d811903c639caa3223ec62&country=ca,us',
+      'https://newsdata.io/api/1/news?apikey=pub_3175393b3d495ea79e039afc0b97f165c93e&country=ca,us',
       (resp) => {
         let data = '';
 

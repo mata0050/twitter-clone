@@ -10,6 +10,8 @@ import NewsCard from './NewsCard';
 const TweetsCard = ({ tweet }) => {
   const tweets = useSelector((state) => state.tweet.tweets);
 
+
+
   return (
     <StyledTweetsCard>
       <div>
@@ -24,7 +26,7 @@ const TweetsCard = ({ tweet }) => {
 
       <div className='width-30'>
         <h1 id='news'>Today's News</h1>
-        <NewsCard />
+      <NewsCard /> 
       </div>
     </StyledTweetsCard>
   );

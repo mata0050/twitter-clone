@@ -16,7 +16,7 @@ const news = (state = initialState, action) => {
       };
     case GET_NEWS_FAIL:
       return {
-        allNews: null,
+        allNews: [],
         loading: false,
       };
     default:

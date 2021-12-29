@@ -35,11 +35,8 @@ function App() {
     dispatch(getAllUsers());
     dispatch(getAllNews());
     dispatch(loadUser());
-    // setInterval(() => {
-    //   dispatch(getAllTweets());
-    //   dispatch(getAllUsers());
-    // }, 60000);
-  }, [getAllUsers, getAllTweets, getAllNews, loadUser]);
+
+  }, [ getAllTweets, loadUser]);
 
   return (
     <StyledApp>

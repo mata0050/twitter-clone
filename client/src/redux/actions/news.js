@@ -6,10 +6,19 @@ export const getAllNews = () => async (dispatch) => {
     // dotenv the key
     const res = await axios.get('/news/latest');
 
-    dispatch({
-      type: GET_NEWS,
-      payload: res.data.results,
-    });
+    if (res.data.status === 'error') {
+    return dispatch({
+        type: GET_NEWS_FAIL,
+      });
+    }
+      dispatch({
+        type: GET_NEWS,
+        payload: res.data.results,
+      });
+    
+
+    console.log(res.data)
+
   } catch (err) {
     dispatch({
       type: GET_NEWS_FAIL,

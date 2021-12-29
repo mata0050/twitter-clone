@@ -29,24 +29,12 @@ const NewsCard = () => {
 
             <Link to={`/news/${item.title}`}>Read More</Link>
 
-            <footer>
-              {/* <div className='comment'>
-              <i class='far fa-comments'></i>
-              <span>{comment.length}</span>
-            </div>
-
-            <div className='like'>
-              <i class='far fa-heart'></i>
-              <span>{like.length}</span>
-            </div>
-
-            <div className='dislike'>
-              <i class='far fa-thumbs-down'></i>
-              <span>{disLike.length}</span>
-            </div> */}
-            </footer>
           </article>
         ))}
+
+      {news.length === 0 && (
+        <h3 style={{marginTop: '40px', fontWeight: '500'}}>Sorry, we are using a free news api and it has limited requests. That's why you can't see the News Section.</h3>
+      )}
     </StyledTweet>
   );
 };

@@ -26,19 +26,16 @@ const Tweet = () => {
       <TweetNavBar />
 
       <Routes>
-        <Route path='/' element={<TweetsCard />} />
-        <Route path='news' element={<NewsCard />} />
-        <Route path='news/:id' element={<News />} />
+        <Route path='/' element={ <TweetsCard />} />
+        <Route path='news' element={ <NewsCard />} />
+        <Route path='news/:id' element={ <News />} />
       </Routes>
-
     </StyledTweet>
   );
 };
 
 const StyledTweet = styled.div`
   position: relative;
-
-  
 `;
 
 export default Tweet;

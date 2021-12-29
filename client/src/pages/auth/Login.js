@@ -5,10 +5,12 @@ import { Link, Navigate } from 'react-router-dom';
 // Components
 import AuthNavBar from '../../components/AuthNavBar';
 import { StyledInput } from '../../css/LinkButtonsStyle';
+import  Alert  from '../../components/Alert';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/actions/auth';
+import {setAlert} from '../../redux/actions/alert';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,14 @@ const Login = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if(email=== ''){
+      return dispatch(setAlert('Please enter a email', 'danger'))
+    }
+
+    if(password=== ''){
+      return dispatch(setAlert('Please enter a password', 'danger'))
+    }
     dispatch(loginUser(formData));
   };
 
@@ -42,6 +52,8 @@ const Login = () => {
 
         <div className='form'>
           <h2>Sign in to Twitter</h2>
+
+          <Alert/>
 
           <form onSubmit={onSubmit}>
             <StyledInput
@@ -118,15 +130,13 @@ const StyledLogin = styled.div`
     }
   }
 
-  @media only screen and (min-width:768px){
-    .login{
-      .form{
+  @media only screen and (min-width: 768px) {
+    .login {
+      .form {
         width: 450px;
         margin: 0 auto;
       }
     }
   }
-
-
 `;
 export default Login;
