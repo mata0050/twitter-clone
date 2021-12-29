@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 
@@ -18,7 +18,8 @@ import AuthNavBar from '../../components/AuthNavBar';
 const Profile = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // const userProfile = useSelector((state) => state.auth.user);
+  const userProfile = useSelector((state) => state.auth.user);
+  const [redirect, setRedirect] = useState(false);
 
   const [formData, setFormData] = useState({
     username: '',
@@ -38,8 +39,17 @@ const Profile = () => {
     avatar,
   } = formData;
 
-  // if(userProfile.username)  username = userProfile.username;
-  // console.log(userProfile);
+  // if(userProfile.username) { username = userProfile.username}
+  console.log(userProfile);
+
+  useEffect(() => {
+    userProfile !== null &&
+      setFormData({
+        username: userProfile.username,
+        avatar: userProfile.avatar,
+        email: userProfile.email,
+      });
+  }, []);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -70,10 +80,17 @@ const Profile = () => {
     };
 
     dispatch(updateUser(data));
+    dispatch(setAlert('Update was successful', 'success'));
+    setRedirect(!redirect);
   };
 
   // Redirect if logged in
   if (!isAuthenticated) {
+    return <Navigate to='/' />;
+  }
+
+  // Redirect after update.
+  if (redirect) {
     return <Navigate to='/' />;
   }
 

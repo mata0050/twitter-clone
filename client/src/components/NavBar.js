@@ -22,6 +22,9 @@ const NavBar = () => {
     allTweets.length !== 0 &&
     allTweets.filter((t) => t.userID === userId).length;
 
+
+    console.log(allTweets);
+
   return (
     <StyleContainer>
       <StyledNavBar>
@@ -31,7 +34,7 @@ const NavBar = () => {
         <div className='account-name'>
           <span>{username !== null ? `@${username}` : 'Tweeter'}</span>
           <span>
-            {allTweets.length === 0
+            {!isAuthenticated
               ? 'Welcome to Tweeter'
               : `${userTweets} Tweets`}
           </span>
@@ -79,11 +82,12 @@ const StyledNavBar = styled.div`
     span{
       font-weight: 600;
       font-size: 1.2rem;
-
+      
       :last-child {
         font-weight: 400;
         font-size: .9rem;
-        color: var(--color-lightGrey)
+        margin-top: 5px;
+        color: white;
     }
   }
 `;

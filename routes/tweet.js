@@ -108,12 +108,12 @@ router.put('/like', auth, async (req, res) => {
     let tweet = await Tweet.findById({ _id: tweetID });
 
     const likes = tweet.like;
-    const isMatch = await Tweet.findOne({ 'like.userID': userID });
-    console.log(isMatch);
-    //allow user to add one like only
-    if (!isMatch) {
-      return res.send('error');
-    }
+    // const isMatch = await Tweet.findOne({ 'like.userID': userID });
+    // console.log(isMatch);
+    // //allow user to add one like only
+    // if (!isMatch) {
+    //   return res.send('error');
+    // }
 
     likes.push({
       userID,

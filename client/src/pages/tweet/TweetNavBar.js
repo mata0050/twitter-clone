@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+// Redux
+import {useSelector} from 'react-redux';
+
+
 const TweetNavBar = () => {
+  const allNews = useSelector((state) => state.news.allNews);
   return (
     <StyledTweets>
       <nav>
@@ -10,9 +15,10 @@ const TweetNavBar = () => {
           <li>
             <Link to='/'>Tweets</Link>
           </li>
+          {allNews &&
           <li>
             <Link to='/news'>News</Link>
-          </li>
+          </li>}
         </ul>
       </nav>
     </StyledTweets>
@@ -20,7 +26,10 @@ const TweetNavBar = () => {
 };
 
 const StyledTweets = styled.div`
-  
+  position: sticky;
+  top: 65px;
+  background: black;
+
   border-bottom: 1px solid var(--color-lightGrey);
 
   ul {

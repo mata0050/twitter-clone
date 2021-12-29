@@ -107,6 +107,7 @@ export const updateUser = (formData) => async (dispatch) => {
       type: UPDATE_USER_PROFILE,
       payload: res.data,
     });
+    dispatch(loadUser());
   } catch (err) {
     // note will dispatch alert error
   }

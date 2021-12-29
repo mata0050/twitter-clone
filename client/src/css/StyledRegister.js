@@ -33,6 +33,24 @@ const StyledRegister = styled.div`
       width: 85%;
     }
   }
+  @media only screen and (min-width: 768px) {
+    .register {
+      form,
+      h2 {
+        width: 450px;
+        margin: 0 auto;
+      }
+
+      h2 {
+      margin-bottom: 25px;
+      font-size: 1.4rem;
+    }
+
+    input:last-child {
+      width: 450px;
+    }
+    }
+  }
 `;
 
 export default StyledRegister;

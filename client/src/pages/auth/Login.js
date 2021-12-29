@@ -117,5 +117,16 @@ const StyledLogin = styled.div`
       }
     }
   }
+
+  @media only screen and (min-width:768px){
+    .login{
+      .form{
+        width: 450px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+
 `;
 export default Login;

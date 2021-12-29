@@ -9,7 +9,6 @@ import { getAllUsers, loadUser } from './redux/actions/auth';
 import { getAllNews } from './redux/actions/news';
 import { useDispatch } from 'react-redux';
 
-
 // Components
 import Footer from '../src/components/Footer';
 import LeftNavBar from './components/LeftNavBar';
@@ -56,7 +55,6 @@ function App() {
       <main>
         <div className='black-bar'></div>
 
-
         <Tweet />
       </main>
       <LeftNavBar />
@@ -84,5 +82,6 @@ const StyledApp = styled.div`
       background: var(--color-black);
     }
   }
+
 `;
 export default App;

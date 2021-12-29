@@ -10,24 +10,19 @@ import { addLike, disLikeTweet } from '../../redux/actions/tweet';
 // Components
 import CommentCard from './CommentCard';
 import ShowComments from './ShowComments';
+import NewsCard from './NewsCard';
 
 const TweetCard = ({ tweet }) => {
   const { message, date, userID, comment, like, disLike } = tweet;
   const users = useSelector((state) => state.tweet.allUsers);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const userId = useSelector((state) => state.auth.userId);
-  const [profile, setProfile] = useState(null);
   const [showComment, setShowComment] = useState(false);
+
   const dispatch = useDispatch();
 
-  // Get user profile
-  useEffect(() => {
-    users.forEach((user) => {
-      if (user._id === userID) {
-        setProfile(user);
-      }
-    });
-  }, [users]);
+  console.log(tweet);
 
   // hide and show comment section
   const onClickHandler = () => {
@@ -67,19 +62,25 @@ const TweetCard = ({ tweet }) => {
   return (
     <StyledTweet>
       <article>
-        {profile !== null && <img src={profile.avatar} alt='profile pic' />}
+        {users
+          .filter((user) => user._id === userID)
+          .map((user) => (
+            <img src={user.avatar} alt='profile pic' />
+          ))}
 
         <div className='content'>
-          {profile !== null && (
-            <header>
-              <span>
-                {profile.username[0].toUpperCase() +
-                  profile.username.substring(1)}
-              </span>
-              <span>@{profile.username}</span>
-              <span> {moment(date).format('MMM DD, YYYY')}</span>
-            </header>
-          )}
+          {users
+            .filter((user) => user._id === userID)
+            .map((profile) => (
+              <header>
+                <span>
+                  {profile.username[0].toUpperCase() +
+                    profile.username.substring(1)}
+                </span>
+                <span>@{profile.username}</span>
+                <span> {moment(date).format('MMM DD, YYYY')}</span>
+              </header>
+            ))}
 
           <p>{message}</p>
 
@@ -117,17 +118,20 @@ const TweetCard = ({ tweet }) => {
           )}
         </div>
       </article>
+  
     </StyledTweet>
   );
 };
 
 const StyledTweet = styled.div`
-  padding: 25px;
-  border-bottom: 1px solid var(--color-lightGrey);
-
+  
   article {
     display: flex;
     flex-direction: row;
+    padding: 25px;
+    border-bottom: 1px solid var(--color-lightGrey);
+    border-right: 1px solid var(--color-lightGrey);
+
 
     img {
       height: 60px;
@@ -175,8 +179,6 @@ const StyledTweet = styled.div`
         font-size:1.3rem;
       }
     }
-
-    
     
     .comment:hover , 
     .dislike:hover{
@@ -191,9 +193,17 @@ const StyledTweet = styled.div`
     cursor: pointer;
   }
 
-
   h3{
     margin: 20px 0;
+  }
+
+  @media only screen and (min-width: 768px){
+    max-width:55vw;
+
+    article{
+      /* max-width:650px; */
+      border-right: 1px solid var(--color-lightGrey);
+    }
   }
 
 
