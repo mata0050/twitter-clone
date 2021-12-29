@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { broadcastTweet } from '../../redux/actions/tweet';
+import { broadcastTweet, getAllTweets } from '../../redux/actions/tweet';
 
 // Component
 import TweetCard from './TweetCard';
@@ -11,51 +11,16 @@ import NewsCard from './NewsCard';
 
 const TweetsCard = ({ tweet, socket }) => {
   const tweets = useSelector((state) => state.tweet.tweets);
-  const [receivedTweet, setReceivedTweet] = useState(null);
-  const [allReceivedTweet, setAllReceivedTweet] = useState([]);
-  const [state, setState] = useState(false);
   const dispatch = useDispatch();
 
+  // receive tweet from broadcast socket io and dispatch store
   socket.on('receive-tweet', (tweet) => {
-    // console.log(tweet);
-    setReceivedTweet(tweet);
-    setState(true);
+    dispatch(getAllTweets());
   });
-
-  useEffect(() => {
-    if (state) {
-      const isMatch =
-        allReceivedTweet.length !== 0 &&
-        allReceivedTweet.filter(
-          (item) => item.message === receivedTweet.message
-        );
-
-        
-      console.log('ismatch', isMatch);
-      if (isMatch.length >= 1) {
-        return;
-      } else {
-        setAllReceivedTweet([...allReceivedTweet, receivedTweet]);
-      }
-      setState(false);
-    }
-  }, [receivedTweet, allReceivedTweet]);
-
-  console.log(state);
-  console.log(receivedTweet);
-  console.log(allReceivedTweet);
 
   return (
     <StyledTweetsCard>
       <div>
-        {allReceivedTweet.length !== 0 && (
-          <>
-            {' '}
-            {allReceivedTweet.map((tweet) => (
-              <TweetCard tweet={receivedTweet} />
-            ))}{' '}
-          </>
-        )}
         {tweets.length !== 0 && (
           <>
             {tweets.map((tweet) => (
