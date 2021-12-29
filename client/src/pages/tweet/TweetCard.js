@@ -118,7 +118,7 @@ const TweetCard = ({ tweet }) => {
           )}
         </div>
       </article>
-  
+
     </StyledTweet>
   );
 };

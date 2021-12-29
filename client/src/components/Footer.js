@@ -15,7 +15,7 @@ const Footer = () => {
     <StyledFooter>
       {isAuthenticated ? (
         <>
-          <StyledLink to='..' style={{ flex: 0.5 }}>
+          <StyledLink to='..' style={{ flex: 0.3 }}>
             Log out
           </StyledLink>
         </>
@@ -46,6 +46,7 @@ const StyledFooter = styled.div`
 
   @media only screen and (min-width:992px) {
     gap: 440px;
+ 
   }
 `;
 
