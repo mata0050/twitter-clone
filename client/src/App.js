@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
-import { io } from 'socket.io-client';
+
 
 // Redux
 import { getAllTweets } from './redux/actions/tweet';
@@ -21,12 +21,7 @@ import Profile from './pages/profile';
 function App() {
   const dispatch = useDispatch();
 
-  const socket = io('http://localhost:8001');
-  socket.on('connect', () => {
-    console.log(`You connected with id ${socket.id}`);
-    // emit will send to use to send tweet
-    socket.emit('custom-event', { a: 'hellloo' });
-  });
+
 
   // Note
   //will reload to get new tweets every 60 seconds

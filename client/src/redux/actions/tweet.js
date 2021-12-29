@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import store from '../configureStore';
 
 import {
   GET_ALL_TWEETS,
@@ -6,7 +7,8 @@ import {
   CREATE_TWEET,
   CREATE_COMMENT,
   ADD_LIKE,
-  DISLIKE_TWEET
+  DISLIKE_TWEET,
+  ADD_TWEET_SOCKET_IO,
 } from '../actions/types';
 
 import { setAlert } from '../actions/alert';
@@ -38,6 +40,32 @@ export const getAllTweets = () => async (dispatch) => {
       setAlert('Please reload the page something went wrong', 'warning')
     );
   }
+};
+
+// @route
+// @desc    BROADCASTING TWEET USING SOCKET IO
+// @access   Private
+export const broadcastTweet = (formData) => (dispatch) => {
+  const { userID, message } = formData;
+  const tweet = {
+    message,
+    userID,
+    date: Date.now(),
+  };
+
+  let tweets = store.getState().tweet.tweets;
+  tweets.push(tweet);
+
+  const orderedTweets = tweets.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+
+  console.log(orderedTweets);
+
+  // dispatch({
+  //   type: ADD_TWEET_SOCKET_IO,
+  //   payload: orderedTweets,
+  // });
 };
 
 // @route    POST /tweet/new
@@ -93,7 +121,6 @@ export const addLike = (formData) => async (dispatch) => {
     // );
   }
 };
-
 
 // @route    PUT /tweet/dislike
 // @desc     ADD A LIKE

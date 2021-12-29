@@ -1,20 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { broadcastTweet } from '../../redux/actions/tweet';
+
+// Component
 import TweetCard from './TweetCard';
 import NewsCard from './NewsCard';
 
-// Component
-const TweetsCard = ({ tweet }) => {
+const TweetsCard = ({ tweet, socket }) => {
   const tweets = useSelector((state) => state.tweet.tweets);
+  const [receivedTweet, setReceivedTweet] = useState(null);
+  const [allReceivedTweet, setAllReceivedTweet] = useState([]);
+  const [state, setState] = useState(false);
+  const dispatch = useDispatch();
 
+  socket.on('receive-tweet', (tweet) => {
+    // console.log(tweet);
+    setReceivedTweet(tweet);
+    setState(true);
+  });
 
+  useEffect(() => {
+    if (state) {
+      const isMatch =
+        allReceivedTweet.length !== 0 &&
+        allReceivedTweet.filter(
+          (item) => item.message === receivedTweet.message
+        );
+
+        
+      console.log('ismatch', isMatch);
+      if (isMatch.length >= 1) {
+        return;
+      } else {
+        setAllReceivedTweet([...allReceivedTweet, receivedTweet]);
+      }
+      setState(false);
+    }
+  }, [receivedTweet, allReceivedTweet]);
+
+  console.log(state);
+  console.log(receivedTweet);
+  console.log(allReceivedTweet);
 
   return (
     <StyledTweetsCard>
       <div>
+        {allReceivedTweet.length !== 0 && (
+          <>
+            {' '}
+            {allReceivedTweet.map((tweet) => (
+              <TweetCard tweet={receivedTweet} />
+            ))}{' '}
+          </>
+        )}
         {tweets.length !== 0 && (
           <>
             {tweets.map((tweet) => (
@@ -26,7 +67,7 @@ const TweetsCard = ({ tweet }) => {
 
       <div className='width-30'>
         <h1 id='news'>Today's News</h1>
-      <NewsCard /> 
+        <NewsCard />
       </div>
     </StyledTweetsCard>
   );

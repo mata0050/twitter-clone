@@ -22,7 +22,6 @@ const TweetCard = ({ tweet }) => {
 
   const dispatch = useDispatch();
 
-  console.log(tweet);
 
   // hide and show comment section
   const onClickHandler = () => {

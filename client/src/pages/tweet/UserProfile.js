@@ -11,16 +11,13 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ user, socket }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const { avatar, username, date, _id } = user;
   const [tweet, setTweet] = useState();
   const randomNumber = getRandomInt(90);
   const [showInput, setShowInput] = useState(false);
-
-  console.log(tweet);
-  console.log(_id);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -29,6 +26,17 @@ const UserProfile = ({ user }) => {
       message: tweet,
     };
     dispatch(createTweet(tweetData));
+
+    // broadcast message using IO
+    const broadcastTweet = {
+      userID: _id,
+      message: tweet,
+      date: Date.now(),
+      comment: [],
+      like: [],
+      disLike: [],
+    };
+    socket.emit('create-tweet', broadcastTweet);
     setTweet('');
     setShowInput(!showInput);
   }

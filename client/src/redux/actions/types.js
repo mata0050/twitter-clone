@@ -22,5 +22,6 @@ export const CREATE_TWEET = 'CREATE_TWEET';
 export const GET_ALL_TWEETS = 'GET_ALL_TWEETS';
 export const GET_ALL_TWEETS_FAIL = 'GET_ALL_TWEETS_FAIL';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const ADD_TWEET_SOCKET_IO = 'ADD_TWEET_SOCKET_IO';
 export const ADD_LIKE = 'ADD_LIKE';
 export const DISLIKE_TWEET = 'DISLIKE_TWEET';

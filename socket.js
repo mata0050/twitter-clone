@@ -8,7 +8,8 @@ const io = require('socket.io')(8001, {
 // Socket.io Connection
 io.on('connection', (socket) => {
   console.log(socket.id);
-  socket.on('custom-event', (obj) => {
-    console.log(obj);
+  socket.on('create-tweet', (tweet) => {
+    io.emit('receive-tweet',tweet);
+    console.log(tweet);
   });
 });

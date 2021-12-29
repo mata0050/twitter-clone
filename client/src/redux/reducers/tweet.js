@@ -7,6 +7,7 @@ import {
   CREATE_COMMENT,
   ADD_LIKE,
   DISLIKE_TWEET,
+  ADD_TWEET_SOCKET_IO,
 } from '../actions/types';
 
 const initialState = {
@@ -21,6 +22,7 @@ const tweets = (state = initialState, action) => {
 
   switch (type) {
     case GET_ALL_TWEETS:
+    case ADD_TWEET_SOCKET_IO:
       return {
         ...state,
         tweets: payload,

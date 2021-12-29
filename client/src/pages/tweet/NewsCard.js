@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const NewsCard = () => {
   const news = useSelector((state) => state.news.allNews);
-  console.log(news);
+
 
   return (
     <StyledTweet>
