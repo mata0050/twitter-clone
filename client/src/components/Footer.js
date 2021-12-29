@@ -5,17 +5,23 @@ import styled from 'styled-components';
 import { StyledLink } from '../css/LinkButtonsStyle';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../redux/actions/auth';
 
 const Footer = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
 
   console.log(isAuthenticated);
   return (
     <StyledFooter>
       {isAuthenticated ? (
         <>
-          <StyledLink to='..' style={{ flex: 0.3 }}>
+          <StyledLink
+            to='..'
+            style={{ flex: 0.3 }}
+            onClick={() => dispatch(logout())}
+          >
             Log out
           </StyledLink>
         </>
@@ -44,9 +50,8 @@ const StyledFooter = styled.div`
     gap: 240px;
   }
 
-  @media only screen and (min-width:992px) {
+  @media only screen and (min-width: 992px) {
     gap: 440px;
- 
   }
 `;
 

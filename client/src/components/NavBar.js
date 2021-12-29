@@ -7,6 +7,7 @@ import { StyledLink } from '../css/LinkButtonsStyle';
 
 // Redux
 import { useSelector } from 'react-redux';
+import { logout } from '../redux/actions/auth';
 import Alert from './Alert';
 
 const NavBar = () => {
@@ -22,9 +23,6 @@ const NavBar = () => {
     allTweets.length !== 0 &&
     allTweets.filter((t) => t.userID === userId).length;
 
-
-    console.log(allTweets);
-
   return (
     <StyleContainer>
       <StyledNavBar>
@@ -34,9 +32,7 @@ const NavBar = () => {
         <div className='account-name'>
           <span>{username !== null ? `@${username}` : 'Tweeter'}</span>
           <span>
-            {!isAuthenticated
-              ? 'Welcome to Tweeter'
-              : `${userTweets} Tweets`}
+            {!isAuthenticated ? 'Welcome to Tweeter' : `${userTweets} Tweets`}
           </span>
         </div>
         {!isAuthenticated && (

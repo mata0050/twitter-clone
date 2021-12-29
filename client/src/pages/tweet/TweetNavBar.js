@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 // Redux
-import {useSelector} from 'react-redux';
-
+import { useSelector } from 'react-redux';
 
 const TweetNavBar = () => {
   const allNews = useSelector((state) => state.news.allNews);
@@ -15,10 +14,13 @@ const TweetNavBar = () => {
           <li>
             <Link to='/'>Tweets</Link>
           </li>
-          {allNews &&
-          <li>
-            <Link to='/news'>News</Link>
-          </li>}
+          {allNews && (
+            <li>
+              <Link id='news' to='/news'>
+                News
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </StyledTweets>
@@ -49,6 +51,16 @@ const StyledTweets = styled.div`
     a:active {
       text-decoration: line;
       color: var(--color-blue);
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    ul {
+      li {
+        #news{
+          display: none
+        }
+      }
     }
   }
 `;

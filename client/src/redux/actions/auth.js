@@ -10,6 +10,7 @@ import {
   ALL_USER_LOADED,
   ALL_USER_FAILED,
   LOGIN_USER,
+  LOGOUT,
   LOGIN_USER_FAILED,
   UPDATE_USER_PROFILE,
 } from './types';
@@ -106,6 +107,22 @@ export const updateUser = (formData) => async (dispatch) => {
     dispatch({
       type: UPDATE_USER_PROFILE,
       payload: res.data,
+    });
+    dispatch(loadUser());
+  } catch (err) {
+    // note will dispatch alert error
+  }
+};
+
+
+// @route    PUT /login
+// @desc     Update user profile
+// @access   Private
+export const logout = () => (dispatch) => {
+  try {
+
+    dispatch({
+      type: LOGOUT,
     });
     dispatch(loadUser());
   } catch (err) {
