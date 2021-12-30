@@ -93,6 +93,13 @@ const StyledTweet = styled.div`
       color: var(--color-white);
     }
   }
+
+  @media only screen and (max-width: 992px) {
+    article{
+      padding: 15px;
+      margin: 25px -20px;
+    }
+  }
 `;
 
 export default NewsCard;
