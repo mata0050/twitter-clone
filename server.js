@@ -14,7 +14,7 @@ connectDB();
 // cors
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://tweeter-c.herokuapp.com/'],
     methods: ['GET', 'POST', 'PUT'],
     allowedHeaders: ['Content-Type', 'x-auth-token'],
   })
