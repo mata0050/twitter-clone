@@ -18,23 +18,24 @@ const Tweet = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
 
-  
   // socket io
-  const socket = io('http://localhost:8001');
-  socket.on('connect', () => {
-    console.log(`You connected with id ${socket.id}`);
-    // emit will send to use to send tweet
-  });
-
+  // const socket = io('http://localhost:8001');
+  // socket.on('connect', () => {
+  //   console.log(`You connected with id ${socket.id}`);
+  //   // emit will send to use to send tweet
+  // });
+  let socket = '';
   return (
     <StyledTweet>
-      {isAuthenticated && <>{user !== null && <UserProfile user={user} socket={socket}/>}</>}
+      {isAuthenticated && (
+        <>{user !== null && <UserProfile user={user} socket={socket} />}</>
+      )}
       <TweetNavBar />
 
       <Routes>
-        <Route path='/' element={ <TweetsCard socket={socket}/>} />
-        <Route path='news' element={ <NewsCard />} />
-        <Route path='news/:id' element={ <News />} />
+        <Route path='/' element={<TweetsCard socket={socket} />} />
+        <Route path='news' element={<NewsCard />} />
+        <Route path='news/:id' element={<News />} />
       </Routes>
     </StyledTweet>
   );

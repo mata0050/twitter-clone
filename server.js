@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 
 //Socket io
-require('./socket');
+// require('./socket');
 
 const app = express();
 
