@@ -4,9 +4,12 @@ Twitter is a simple, single-page Twitter clone that was inspired by the [Lightho
 
 This repository is the code for the small Twitter clone l have built over the December Christmas break 2021. The technology that this clone was built on is Nodejs, Express, MongoDB, Socket.io, React, Redux, Axios, Styled-components. l did basic testing using cypress.
 
-___
+---
+
 ## 👉 [Watch a video of the Twitter clone](https://youtu.be/_fJvuyd4FqA)
-___
+
+---
+
 ## Getting Started
 
 1. [Clone ](https://github.com/mata0050/twitter-clone.git) this repository onto your local device.
@@ -14,7 +17,7 @@ ___
 3. cd into the client folder `cd client`, install the frontend dependencies using the `npm install` command.
 4. cd back into the root folder `cd ..`, start the backend and frontend using `npm run dev`.
 5. Backend will be served at <http://localhost:8000/>.
-4. Frontend will be served at <http://localhost:3000/> in your browser.
+6. Frontend will be served at <http://localhost:3000/> in your browser.
 
 ## Dependencies Backend
 
@@ -46,8 +49,6 @@ ___
 ![Screen Shot 2021-12-30 at 10 55 27 AM](https://user-images.githubusercontent.com/58061791/147773622-15c088f3-9bbf-42e1-a639-50026b664e65.png)
 ![Screen Shot 2021-12-30 at 10 55 38 AM](https://user-images.githubusercontent.com/58061791/147773623-49365007-8c8e-4d51-a235-7ca35d897225.png)
 
-
-
 ### After Login
 
 ![Screen Shot 2021-12-30 at 11 00 08 AM](https://user-images.githubusercontent.com/58061791/147773804-2fc40e81-5e3b-4dfa-81af-81bd33e5e9bc.png)
@@ -58,14 +59,10 @@ ___
 
 ![Screen Shot 2021-12-30 at 10 58 38 AM](https://user-images.githubusercontent.com/58061791/147773626-e7cb4350-9a0a-415b-a143-0812c389f732.png)
 
-
 ### Mobile Design
 
 ![Screen Shot 2021-12-30 at 11 03 49 AM](https://user-images.githubusercontent.com/58061791/147773801-876c1eda-9b29-4354-ad32-4f0f12f0bcc5.png)
 ![Screen Shot 2021-12-30 at 11 03 58 AM](https://user-images.githubusercontent.com/58061791/147773803-00408b32-31ff-4dbc-9b1b-ca0e0a37dbb4.png)
-
-
-
 
 ![Screen Shot 2021-12-30 at 11 03 17 AM](https://user-images.githubusercontent.com/58061791/147773808-6842c81b-91c1-4b96-afb7-d4a704d584ed.png)
 ![Screen Shot 2021-12-30 at 11 03 21 AM](https://user-images.githubusercontent.com/58061791/147773809-72de1857-0593-45b8-83e4-4889b41212f6.png)
@@ -73,9 +70,8 @@ ___
 ![Screen Shot 2021-12-30 at 11 03 36 AM](https://user-images.githubusercontent.com/58061791/147773811-8394b575-5eee-4edc-b93f-8cfe2c5d72f3.png)
 ![Screen Shot 2021-12-30 at 11 03 39 AM](https://user-images.githubusercontent.com/58061791/147773812-e844e54c-7ca3-453f-a552-e86219d147fd.png)
 
-
 ## Known Bugs
 
 - News api allows for 200 api requests a day.
 - A user can like and dislike a post multiple times. User should only be able to like or dislike a post once.
-
+- CSS fix for the News Card, doesn't look good.
