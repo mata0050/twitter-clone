@@ -34,7 +34,7 @@ router.post(
 
     const { message, userID } = req.body;
 
-    if (message.length > 140) {
+    if (message.length > 1000) {
       return res.status(400).json({
         errors: [{ msg: 'Your tweet has to be less than 140 characters' }],
       });
