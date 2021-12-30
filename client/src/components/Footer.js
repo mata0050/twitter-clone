@@ -12,7 +12,11 @@ const Footer = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
-  console.log(isAuthenticated);
+  // styles
+  const theme = {
+    marginRight: '20px',
+  };
+
   return (
     <StyledFooter>
       {isAuthenticated ? (
@@ -31,8 +35,18 @@ const Footer = () => {
         </>
       ) : (
         <>
-          <StyledLink to='/login'>Log in</StyledLink>
-          <StyledLink to='/register'>Sign Up</StyledLink>
+          <div>
+            <h1>Don't miss what's happening</h1>
+            <p>People on Tweeter are the first to know</p>
+          </div>
+          <div>
+            <StyledLink theme={theme} to='/login'>
+              Log in
+            </StyledLink>
+            <StyledLink theme={theme} to='/register'>
+              Sign Up
+            </StyledLink>
+          </div>
         </>
       )}
     </StyledFooter>
@@ -55,7 +69,7 @@ const StyledFooter = styled.div`
     display: none;
   }
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 838px) {
     gap: 150px;
     h1,
     p {
@@ -71,12 +85,11 @@ const StyledFooter = styled.div`
     }
   }
 
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1032px) {
     gap: 340px;
   }
 
-
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1208px) {
     gap: 540px;
   }
 `;

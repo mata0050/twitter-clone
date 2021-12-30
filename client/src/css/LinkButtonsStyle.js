@@ -5,13 +5,13 @@ export const StyledLink = styled(Link)`
   border: 1px solid var(--color-white);
   border-radius: 25px;
   padding: 8px 25px;
-  flex: ${props => props.flex || 1};
+  flex: ${(props) => props.flex || 1};
   text-decoration: none;
   color: var(--color-white);
   text-align: center;
   font-weight: bold;
-
-  
+  display: inline-block;
+  margin-right: ${(props) => props.theme.marginRight};
 
   :last-child {
     background-color: var(--color-white);
@@ -35,4 +35,4 @@ export const StyledInput = styled.input`
     border: 1px solid var(--color-blue);
   }
 
-`
+`;
