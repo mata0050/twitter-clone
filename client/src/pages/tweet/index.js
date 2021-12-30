@@ -19,7 +19,11 @@ const Tweet = () => {
   const user = useSelector((state) => state.auth.user);
 
   // socket io
-  const socket = io('http://localhost:8001');
+  const socket = io('http://localhost:8001', {
+    transportOptions: {
+      polling: {},
+    },
+  });
   socket.on('connect', () => {
     console.log(`You connected with id ${socket.id}`);
     // emit will send to use to send tweet
