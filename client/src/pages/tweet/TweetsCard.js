@@ -11,14 +11,14 @@ import NewsCard from './NewsCard';
 import NewToTweeterCard from '../../components/NewToTweeterCard';
 import YouMightLike from '../../components/YouMightLike';
 
-const TweetsCard = ({ tweet, socket }) => {
+const TweetsCard = ({ tweet }) => {
   const tweets = useSelector((state) => state.tweet.tweets);
   const dispatch = useDispatch();
 
   // receive tweet from broadcast socket io and dispatch store
-  socket.on('receive-tweet', (tweet) => {
-    dispatch(getAllTweets());
-  });
+  // socket.on('receive-tweet', (tweet) => {
+  //   dispatch(getAllTweets());
+  // });
 
   return (
     <StyledTweetsCard>

@@ -11,7 +11,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-const UserProfile = ({ user, socket }) => {
+const UserProfile = ({ user }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const { avatar, username, date, _id } = user;
@@ -36,7 +36,7 @@ const UserProfile = ({ user, socket }) => {
       like: [],
       disLike: [],
     };
-    socket.emit('create-tweet', broadcastTweet);
+    // socket.emit('create-tweet', broadcastTweet);
     setTweet('');
     setShowInput(!showInput);
   }
