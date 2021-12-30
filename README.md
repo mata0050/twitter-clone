@@ -4,8 +4,9 @@ Twitter is a simple, single-page Twitter clone that was inspired by the [Lightho
 
 This repository is the code for the small Twitter clone l have built over the December Christmas break 2021. The technology that this clone was built on is Nodejs, Express, MongoDB, Socket.io, React, Redux, Axios, Styled-components. l did basic testing using cypress.
 
+___
 ## 👉 [Watch a video of the Twitter clone](https://youtu.be/_fJvuyd4FqA)
-
+___
 ## Getting Started
 
 1. [Clone ](https://github.com/mata0050/twitter-clone.git) this repository onto your local device.
