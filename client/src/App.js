@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
-
+import { io } from 'socket.io-client';
 
 // Redux
 import { getAllTweets } from './redux/actions/tweet';
@@ -22,15 +22,11 @@ function App() {
   const dispatch = useDispatch();
 
 
-
-  // Note
-  //will reload to get new tweets every 60 seconds
   useEffect(() => {
     dispatch(getAllTweets());
     dispatch(getAllUsers());
     dispatch(getAllNews());
     dispatch(loadUser());
-
   }, [ getAllTweets, loadUser]);
 
   return (
