@@ -19,12 +19,12 @@ const Tweet = () => {
   const user = useSelector((state) => state.auth.user);
 
   // socket io
-  // const socket = io('http://localhost:8001');
-  // socket.on('connect', () => {
-  //   console.log(`You connected with id ${socket.id}`);
-  //   // emit will send to use to send tweet
-  // });
-  let socket = '';
+  const socket = io('http://localhost:8001');
+  socket.on('connect', () => {
+    console.log(`You connected with id ${socket.id}`);
+    // emit will send to use to send tweet
+  });
+
   return (
     <StyledTweet>
       {isAuthenticated && (
