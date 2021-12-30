@@ -40,6 +40,12 @@ This repository is the code for the small Twitter clone l have built over the De
 - socket.io-client
 - styled-Components
 
+## Known Bugs
+
+- News api allows for 200 api requests a day.
+- A user can like and dislike a post multiple times. User should only be able to like or dislike a post once.
+- CSS fix for the News Card, doesn't look
+
 ## ScreenShoots
 
 ### Before Login
@@ -69,9 +75,3 @@ This repository is the code for the small Twitter clone l have built over the De
 ![Screen Shot 2021-12-30 at 11 03 28 AM](https://user-images.githubusercontent.com/58061791/147773810-55dd9eff-37db-4ae8-8b9a-f6c0d0e78e28.png)
 ![Screen Shot 2021-12-30 at 11 03 36 AM](https://user-images.githubusercontent.com/58061791/147773811-8394b575-5eee-4edc-b93f-8cfe2c5d72f3.png)
 ![Screen Shot 2021-12-30 at 11 03 39 AM](https://user-images.githubusercontent.com/58061791/147773812-e844e54c-7ca3-453f-a552-e86219d147fd.png)
-
-## Known Bugs
-
-- News api allows for 200 api requests a day.
-- A user can like and dislike a post multiple times. User should only be able to like or dislike a post once.
-- CSS fix for the News Card, doesn't look good.
