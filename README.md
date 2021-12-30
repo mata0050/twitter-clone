@@ -46,6 +46,7 @@ This repository is the code for the small Twitter clone l have built over the De
 - A user can like and dislike a post multiple times. User should only be able to like or dislike a post once.
 - CSS fix for the News Card, doesn't look
 
+##
 ## ScreenShoots
 
 ### Before Login
