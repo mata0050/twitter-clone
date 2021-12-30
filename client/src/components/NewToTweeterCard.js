@@ -1,19 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 const NewToTweeterCard = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
-    <StyledTweeterCard>
-      <h2>New to Tweeter?</h2>
-      <span>Sign up now to get your own personalized timeline!</span>
-      <button>Sign up with email</button>
-      <span>
-        By signing up, you agree to the{' '}
-        <span className='blue-font'>Terms of Service </span> and{' '}
-        <span className='blue-font'>Privacy Policy</span>, including{' '}
-        <span className='blue-font'>Cookie Use</span>.
-      </span>
-    </StyledTweeterCard>
+    <>
+      {!isAuthenticated && (
+        <StyledTweeterCard>
+          <h2>New to Tweeter?</h2>
+          <span>Sign up now to get your own personalized timeline!</span>
+          <button>Sign up with email</button>
+          <span>
+            By signing up, you agree to the{' '}
+            <span className='blue-font'>Terms of Service </span> and{' '}
+            <span className='blue-font'>Privacy Policy</span>, including{' '}
+            <span className='blue-font'>Cookie Use</span>.
+          </span>
+        </StyledTweeterCard>
+      )}
+    </>
   );
 };
 
@@ -48,8 +56,7 @@ const StyledTweeterCard = styled.div`
   }
 
   @media only screen and (max-width: 992px) {
-
-    h2{
+    h2 {
       font-size: 1.2rem;
     }
     button {
