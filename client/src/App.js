@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
-import { io } from 'socket.io-client';
 
 // Redux
 import { getAllTweets } from './redux/actions/tweet';
@@ -22,12 +21,17 @@ function App() {
   const dispatch = useDispatch();
 
 
+  
   useEffect(() => {
     dispatch(getAllTweets());
     dispatch(getAllUsers());
     dispatch(getAllNews());
     dispatch(loadUser());
-  }, [ getAllTweets, loadUser]);
+    setInterval(() => {
+      dispatch(getAllTweets());
+      dispatch(getAllUsers());
+    }, 5000);
+  }, [getAllTweets, getAllUsers,loadUser]);
 
   return (
     <StyledApp>
@@ -70,6 +74,5 @@ const StyledApp = styled.div`
       background: var(--color-black);
     }
   }
-
 `;
 export default App;
