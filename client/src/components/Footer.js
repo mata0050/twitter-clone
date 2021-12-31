@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 // CSS styles
 import { StyledLink } from '../css/LinkButtonsStyle';
 
@@ -11,11 +12,14 @@ import { logout } from '../redux/actions/auth';
 const Footer = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+ 
 
   // styles
   const theme = {
     marginRight: '20px',
   };
+
+
 
   return (
     <StyledFooter>
