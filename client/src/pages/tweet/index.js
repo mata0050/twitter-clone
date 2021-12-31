@@ -47,6 +47,9 @@ const Tweet = () => {
 
 const StyledTweet = styled.div`
   position: relative;
+
+
+
 `;
 
 export default Tweet;

@@ -66,6 +66,7 @@ const StyledApp = styled.div`
     height: calc(100vh - 65px);
     width: calc(100vw - 70px);
     overflow: scroll;
+    overflow-x: hidden;
 
     /* black bar for top of the nav */
     .black-bar {
