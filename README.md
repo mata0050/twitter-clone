@@ -50,7 +50,8 @@ This repository is the code for the small Twitter clone l have built over the De
 
 - News api allows for 200 api requests a day.
 - A user can like and dislike a post multiple times. User should only be able to like or dislike a post once.
-- CSS fix for the News Card, doesn't look
+- CSS fix for the News Card, doesn't look.
+- Socket io was giving a cors error that l am still working on, using setInterval to make a request for the tweets every 30second. 
 
 ##
 
