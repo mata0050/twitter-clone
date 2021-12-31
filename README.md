@@ -2,6 +2,12 @@
 
 Twitter is a simple, single-page Twitter clone that was inspired by the [Lighthouse Labs Tweeter Clone](https://github.com/mata0050/tweeter) that we as a class built in my week 4 of the program. With my background knowledge and skill of using REACT, l decided to upgrade the clone as l knew everyone in my cohort will have the same projects.
 
+---
+
+## ✊✊ [Interact with Twitter Clone Site](https://tweeter-c.herokuapp.com/) 🤏🤏
+
+---
+
 This repository is the code for the small Twitter clone l have built over the December Christmas break 2021. The technology that this clone was built on is Nodejs, Express, MongoDB, Socket.io, React, Redux, Axios, Styled-components. l did basic testing using cypress.
 
 ---
@@ -47,6 +53,7 @@ This repository is the code for the small Twitter clone l have built over the De
 - CSS fix for the News Card, doesn't look
 
 ##
+
 ## ScreenShoots
 
 ### Before Login
