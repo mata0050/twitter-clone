@@ -30,7 +30,7 @@ function App() {
     setInterval(() => {
       dispatch(getAllTweets());
       dispatch(getAllUsers());
-    }, 5000);
+    }, 30000);
   }, [getAllTweets, getAllUsers,loadUser]);
 
   return (
